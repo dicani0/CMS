@@ -5,10 +5,10 @@
           <a href="#categories" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-light">Categories</a>
           <ul class="collapse list-unstyled" id="categories">
             <li>
-              <a class="text-light" href="#">1st link</a>
+              <a class="text-light" href="#">View all categories</a>
             </li>
             <li>
-              <a class="text-light" href="#">2nd link</a>
+              <a class="text-light" href="index.php?action=categories">Add category</a>
             </li>
             <li>
               <a class="text-light" href="#">3rd link</a>
@@ -17,8 +17,8 @@
           <li>
           <a href="#posts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-light">Posts</a>
             <ul class="collapse list-unstyled" id="posts">
-              <li><a class="text-light" href="#">Add</a></li>
-              <li><a class="text-light" href="#">Remove</a></li>
+              <li><a class="text-light" href="#">View all posts</a></li>
+              <li><a class="text-light" href="#">Add post</a></li>
             </ul>
           </li>
         </li>

@@ -8,3 +8,7 @@
     <title>Document</title>
 </head>
 <body>
+<?php 
+    ob_start(); 
+    include 'funcs.php';
+?>
