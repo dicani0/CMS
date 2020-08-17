@@ -13,9 +13,4 @@
     if(!$connection) {
         echo 'Failed to connect to database!';
     }
-    else {
-        echo 'Connected to database ' . DB_NAME;
-    }
-
-
 ?>

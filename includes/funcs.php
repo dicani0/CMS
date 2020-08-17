@@ -49,6 +49,13 @@
         }
     }
 
+    function getAllCategories() {
+        global $connection;
+        $query = 'SELECT * FROM categories';
+        $select_all_categories_query = mysqli_query($connection, $query);
+        return $select_all_categories_query;
+    }
+
     function getCategoryById() {
         global $connection;
         if(isset($_GET['editcategory'])) {
@@ -59,6 +66,34 @@
                 $category['name'] = $row['name'];
             }
             return $category;
+        }
+    }
+
+    function getAllPosts() {
+        global $connection;
+        $query = 'SELECT * FROM posts';
+        $select_all_posts_query = mysqli_query($connection, $query);
+        return $select_all_posts_query;
+    }
+
+    function insertPost() {
+        global $connection;
+        if (isset($_POST['create_post'])) {
+            $post_category = $_POST['category'];
+            $post_title = $_POST['title'];
+            $post_author = $_POST['author'];
+            $post_date = date('d-m-y');
+            $post_tags = $_POST['tags'];
+            $post_content = $_POST['content'];
+            $post_image = $_FILES['image']['name'];
+            $post_image_tmp = $_FILES['image']['tmp_name'];
+            $post_comment_count = 5;
+    
+            // move_uploaded_file($post_image_tmp, "../../../images/$post_image");
+            $query = "INSERT INTO posts(category_id, title, author, date, image, content, tags, comment_count) ";
+            $query .= "VALUES('{$post_category}', '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_comment_count}')";
+            move_uploaded_file($post_image_tmp, "C:/xampp/htdocs/CMS/images/$post_image");
+            $insert_post_query = mysqli_query($connection, $query);
         }
     }
 ?>

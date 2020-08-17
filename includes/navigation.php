@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-2">
-    <button type="button" id="sidebarCollapse" class="btn btn-outline-dark mr-3">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-1">
+    <button type="button" id="sidebarCollapse" class="btn btn-outline-white mr-3">
       <i class="fas fa-align-left"></i>
       <span>Toggle Sidebar</span>
     </button>
