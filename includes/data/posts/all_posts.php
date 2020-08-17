@@ -1,4 +1,9 @@
 <div class="content px-2 w-100">
+    <?php 
+        if (isset($_GET['deletepost'])) {
+            deletePost($_GET['deletepost']);
+        }
+    ?>
     <table class="table table-bordered">
         <thead class="thead">
             <td>ID</td>
@@ -13,11 +18,11 @@
             <td>Actions</td>
         </thead>
         <tbody>
+    <?php
+        $posts = getAllPosts();
+        foreach ($posts as $row) {
+    ?>
             <tr>
-                <?php 
-                    $posts = getAllPosts();
-                    foreach ($posts as $row) {
-                ?>
                 <td><?= $row['id'] ?></td>
                 <td><?= $row['category_id'] ?></td>
                 <td><?= $row['title'] ?></td>
@@ -27,9 +32,9 @@
                 <td><?= $row['content'] ?></td>
                 <td><?= $row['comment_count'] ?></td>
                 <td><?= $row['tags'] ?></td>
-                <td></td>
+                <td><a class="btn btn-dark mr-2" href="/cms/includes/data/posts/posts.php?action=editpost&editpost=<?=$row['id']?>">Edit</a><a href="/cms/includes/data/posts/posts.php?deletepost=<?=$row['id']?>" class="btn btn-danger">Delete</a></td>
             </tr>
-                <?php } ?>
+    <?php } ?>
         </tbody>
     </table>
 </div>

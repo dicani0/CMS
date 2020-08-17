@@ -16,7 +16,7 @@
             <hr>
             <div class="p-1"> by  <a href="#"><?php echo $author;?></a></div>
             <div class="p-1 mb-3"><i class="far fa-clock"></i> <?php echo " " . $date; ?></div>
-            <img src="" alt="Photo" class="img-thumbnail mb-3">
+            <img width="500" src="/cms/images/<?=$image?>" alt="Photo" class="img-thumbnail mb-3">
             <p class="lead"><?php echo $content; ?></p>
             <hr>
             <small><?php echo $tags ?></small>

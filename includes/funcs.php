@@ -68,12 +68,20 @@
             return $category;
         }
     }
+    // POSTS
 
     function getAllPosts() {
         global $connection;
         $query = 'SELECT * FROM posts';
         $select_all_posts_query = mysqli_query($connection, $query);
         return $select_all_posts_query;
+    }
+
+    function getPostById($id) {
+        global $connection;
+        $query = "SELECT * FROM posts WHERE id = {$id}";
+        $select_post_by_id_query = mysqli_query($connection, $query);
+        return mysqli_fetch_assoc($select_post_by_id_query);
     }
 
     function insertPost() {
@@ -92,8 +100,16 @@
             // move_uploaded_file($post_image_tmp, "../../../images/$post_image");
             $query = "INSERT INTO posts(category_id, title, author, date, image, content, tags, comment_count) ";
             $query .= "VALUES('{$post_category}', '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_comment_count}')";
-            move_uploaded_file($post_image_tmp, "C:/xampp/htdocs/CMS/images/$post_image");
+            move_uploaded_file($post_image_tmp, "C:/xamppnew/htdocs/CMS/images/$post_image");
             $insert_post_query = mysqli_query($connection, $query);
         }
     }
+
+    function deletePost($id) {
+        global $connection;
+        $query = "DELETE from posts WHERE id = {$id}";
+        $delete_post_query = mysqli_query($connection, $query);
+        return $delete_post_query;
+    }
+
 ?>

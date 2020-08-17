@@ -5,7 +5,9 @@
             case 'addpost':
                 include 'add_post.php';
                 break;
-            
+            case 'editpost':
+                include 'edit_post.php';
+                break;                
             default:
                 # code...
                 break;
