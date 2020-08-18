@@ -1,13 +1,13 @@
 <?php
     $post = getPostById($_GET['editpost']);
-    updatePost($post['id']);
+    // updatePost($post['id']);
     $categories = getAllCategories();
 ?>
 <form method="post" class="w-100 p-2" enctype="multipart/form-data" action="posts.php">
     <div class="row w-100">
         <div class="col-6">                                    
             <div class="form-group">
-                <label for="">Category</label>
+                <input type="hidden" name="id" value="<?=$post['id']?>">
                 <label for="">Category</label>
                     <select class='form-control' name="category" id="">
                         <?php 

@@ -111,25 +111,22 @@
     }
 
     function updatePost($id) {
-        if(isset($_POST['update_post'])) {
-            global $connection;
-            $post_category = $_POST['category'];
-            $post_title = $_POST['title'];
-            $post_author = $_POST['author'];
-            $post_date = date('d-m-y');
-            $post_tags = $_POST['tags'];
-            $post_content = $_POST['content'];
-            $post_image = $_FILES['image']['name'];
-            $post_image_tmp = $_FILES['image']['tmp_name'];
-            $post_comment_count = 5;
-    
-            $query = "UPDATE posts ";
-            $query .= "SET category_id = '{$post_category}', title = '{$post_title}', author = '{$post_author}', date = {$post_date}, tags = '{$post_tags}', content = '{$post_content}', image = '{$post_image}' ";
-            $query .= "WHERE id = {$id}";
-            if(!$update_post_query = mysqli_query($connection, $query)) {
-                die(mysqli_error($connection));
-            }
-            move_uploaded_file($post_image_tmp, "C:/xampp/htdocs/CMS/images/$post_image");           
+        global $connection;
+        $post_category = $_POST['category'];
+        $post_title = $_POST['title'];
+        $post_author = $_POST['author'];
+        $post_date = date('d-m-y');
+        $post_tags = $_POST['tags'];
+        $post_content = $_POST['content'];
+        $post_image = $_FILES['image']['name'];
+        $post_image_tmp = $_FILES['image']['tmp_name'];
+        $post_comment_count = 5;
+        $query = "UPDATE posts ";
+        $query .= "SET category_id = '{$post_category}', title = '{$post_title}', author = '{$post_author}', date = {$post_date}, tags = '{$post_tags}', content = '{$post_content}', image = '{$post_image}' ";
+        $query .= "WHERE id = {$id}";
+        if(!$update_post_query = mysqli_query($connection, $query)) {
+            die(mysqli_error($connection));
         }
+        move_uploaded_file($post_image_tmp, "C:/xampp/htdocs/CMS/images/$post_image");           
     }
 ?>

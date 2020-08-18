@@ -3,6 +3,9 @@
         if (isset($_GET['deletepost'])) {
             deletePost($_GET['deletepost']);
         }
+        if(isset($_POST['update_post'])) {
+            updatePost($_POST['id']);
+        }
     ?>
     <table class="table table-bordered">
         <thead class="thead">
