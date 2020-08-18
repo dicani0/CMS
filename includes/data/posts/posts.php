@@ -6,11 +6,7 @@
         include '../../sidebar.php';
         include 'routing.php';
     ?>
-
-
 </div>
-
 <?php
     include '../../footer.php';
 ?>
-

@@ -19,7 +19,7 @@
             </form>
             <?php
                 if (isset($_GET['editcategory'])) {
-                    $category = getCategoryById();
+                    $category = getCategoryById($_GET['editcategory']);
             ?>
             <form action="" method="post">
                 <div class="form-group">

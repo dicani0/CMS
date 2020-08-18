@@ -1,10 +1,9 @@
 <?php
-    insertPost();
     $categories = getAllCategories();
 ?>
 
 <div class="content w-100 px-2">
-    <form method="post" enctype="multipart/form-data" action="">
+    <form method="post" enctype="multipart/form-data" action="posts.php">
         <div class="row w-100">
             <div class="col-6">
                 

@@ -56,17 +56,15 @@
         return $select_all_categories_query;
     }
 
-    function getCategoryById() {
+    function getCategoryById($id) {
         global $connection;
-        if(isset($_GET['editcategory'])) {
-            $query = "SELECT * from categories WHERE id = {$_GET['editcategory']}";
-            $select_category_by_id_query = mysqli_query($connection, $query);
-            while ($row = mysqli_fetch_assoc($select_category_by_id_query)) {
-                $category['id'] = $row['id'];
-                $category['name'] = $row['name'];
-            }
-            return $category;
+        $query = "SELECT * from categories WHERE id = {$id}";
+        $select_category_by_id_query = mysqli_query($connection, $query);
+        while ($row = mysqli_fetch_assoc($select_category_by_id_query)) {
+            $category['id'] = $row['id'];
+            $category['name'] = $row['name'];
         }
+        return $category;
     }
     // POSTS
 
@@ -100,6 +98,9 @@
             $query .= "VALUES('{$post_category}', '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_comment_count}')";
             move_uploaded_file($post_image_tmp, "C:/xampp/htdocs/CMS/images/$post_image");
             $insert_post_query = mysqli_query($connection, $query);
+            if ($insert_post_query) {
+                header('Location: posts.php');
+            }
         }
     }
 
@@ -112,6 +113,7 @@
 
     function updatePost($id) {
         global $connection;
+        // var_dump($_FILES); exit;
         $post_category = $_POST['category'];
         $post_title = $_POST['title'];
         $post_author = $_POST['author'];
@@ -122,11 +124,20 @@
         $post_image_tmp = $_FILES['image']['tmp_name'];
         $post_comment_count = 5;
         $query = "UPDATE posts ";
-        $query .= "SET category_id = '{$post_category}', title = '{$post_title}', author = '{$post_author}', date = {$post_date}, tags = '{$post_tags}', content = '{$post_content}', image = '{$post_image}' ";
-        $query .= "WHERE id = {$id}";
+        if(isset($_FILES['image']['name'])) {
+            $query .= "SET category_id = '{$post_category}', title = '{$post_title}', author = '{$post_author}', date = {$post_date}, tags = '{$post_tags}', content = '{$post_content}', image = '{$post_image}' ";
+            $query .= "WHERE id = {$id}";
+            move_uploaded_file($post_image_tmp, "C:/xampp/htdocs/CMS/images/$post_image"); 
+        }
+        else {
+            $query .= "SET category_id = '{$post_category}', title = '{$post_title}', author = '{$post_author}', date = {$post_date}, tags = '{$post_tags}', content = '{$post_content}' ";
+            $query .= "WHERE id = {$id}";
+        }
         if(!$update_post_query = mysqli_query($connection, $query)) {
             die(mysqli_error($connection));
         }
-        move_uploaded_file($post_image_tmp, "C:/xampp/htdocs/CMS/images/$post_image");           
+        if (mysqli_query($connection, $query)) {
+            header('Location: posts.php');
+        }
     }
 ?>

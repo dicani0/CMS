@@ -6,6 +6,10 @@
         if(isset($_POST['update_post'])) {
             updatePost($_POST['id']);
         }
+        if(isset($_POST['create_post'])) {
+            insertPost();
+        }
+        $_POST = array();
     ?>
     <table class="table table-bordered">
         <thead class="thead">
@@ -24,10 +28,11 @@
     <?php
         $posts = getAllPosts();
         foreach ($posts as $row) {
+            $category = getCategoryById($row['category_id']);
     ?>
             <tr>
                 <td><?= $row['id'] ?></td>
-                <td><?= $row['category_id'] ?></td>
+                <td><?= $category['name'] ?></td>
                 <td><?= $row['title'] ?></td>
                 <td><?= $row['author'] ?></td>
                 <td><?= $row['date'] ?></td>
