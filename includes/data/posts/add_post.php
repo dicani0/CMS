@@ -1,5 +1,6 @@
 <?php
     insertPost();
+    $categories = getAllCategories();
 ?>
 
 <div class="content w-100 px-2">
@@ -9,7 +10,15 @@
                 
                 <div class="form-group">
                     <label for="">Category</label>
-                    <input type="text" class="form-control" name="category" id="">
+                    <select class='form-control' name="category" id="">
+                        <?php 
+                            foreach ($categories as $category) {
+                        ?>
+                        <option  value="<?=$category['id']?>"><?=$category['name']?></option>
+                        <?php
+                            }
+                        ?>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="">Title</label>

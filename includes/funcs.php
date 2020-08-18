@@ -96,11 +96,9 @@
             $post_image = $_FILES['image']['name'];
             $post_image_tmp = $_FILES['image']['tmp_name'];
             $post_comment_count = 5;
-    
-            // move_uploaded_file($post_image_tmp, "../../../images/$post_image");
             $query = "INSERT INTO posts(category_id, title, author, date, image, content, tags, comment_count) ";
             $query .= "VALUES('{$post_category}', '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_comment_count}')";
-            move_uploaded_file($post_image_tmp, "C:/xamppnew/htdocs/CMS/images/$post_image");
+            move_uploaded_file($post_image_tmp, "C:/xampp/htdocs/CMS/images/$post_image");
             $insert_post_query = mysqli_query($connection, $query);
         }
     }
@@ -112,4 +110,26 @@
         return $delete_post_query;
     }
 
+    function updatePost($id) {
+        if(isset($_POST['update_post'])) {
+            global $connection;
+            $post_category = $_POST['category'];
+            $post_title = $_POST['title'];
+            $post_author = $_POST['author'];
+            $post_date = date('d-m-y');
+            $post_tags = $_POST['tags'];
+            $post_content = $_POST['content'];
+            $post_image = $_FILES['image']['name'];
+            $post_image_tmp = $_FILES['image']['tmp_name'];
+            $post_comment_count = 5;
+    
+            $query = "UPDATE posts ";
+            $query .= "SET category_id = '{$post_category}', title = '{$post_title}', author = '{$post_author}', date = {$post_date}, tags = '{$post_tags}', content = '{$post_content}', image = '{$post_image}' ";
+            $query .= "WHERE id = {$id}";
+            if(!$update_post_query = mysqli_query($connection, $query)) {
+                die(mysqli_error($connection));
+            }
+            move_uploaded_file($post_image_tmp, "C:/xampp/htdocs/CMS/images/$post_image");           
+        }
+    }
 ?>

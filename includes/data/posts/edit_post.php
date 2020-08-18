@@ -1,12 +1,32 @@
 <?php
     $post = getPostById($_GET['editpost']);
+    updatePost($post['id']);
+    $categories = getAllCategories();
 ?>
-<form method="post" class="w-100 p-2" enctype="multipart/form-data" action="">
+<form method="post" class="w-100 p-2" enctype="multipart/form-data" action="posts.php">
     <div class="row w-100">
         <div class="col-6">                                    
             <div class="form-group">
                 <label for="">Category</label>
-                <input type="text" class="form-control" name="category" id="" value="<?=$post['category_id']?>">
+                <label for="">Category</label>
+                    <select class='form-control' name="category" id="">
+                        <?php 
+                            foreach ($categories as $category) {
+                        ?>
+                            <?php
+                                if($post['category_id'] === $category['id']) {
+                            ?>
+                            <option selected value="<?=$category['id']?>"><?=$category['name']?></option>
+                            <?php
+                                }
+                                else {
+                            ?>
+                        <option  value="<?=$category['id']?>"><?=$category['name']?></option>
+                        <?php
+                                }
+                            }
+                        ?>
+                    </select>
             </div>
             <div class="form-group">
                 <label for="">Title</label>
@@ -21,7 +41,7 @@
                 <input type="text" class="form-control" name="tags" id="" value="<?=$post['tags']?>">
             </div>
             <div class="form-group text-center">
-                <input type="submit" class="form-control btn btn-dark w-50" name="create_post" value="Update">
+                <input type="submit" class="form-control btn btn-dark w-50" name="update_post" value="Update">
             </div>
         </div>
         <div class="col-6">
@@ -32,7 +52,9 @@
             <div class="form-group">
                 <label for="">Image</label>
                 <input type="file" name="image" class="form-control" id="">
-                <img class="img-fluid mt-4" src="/cms/images/<?=$post['image']?>" alt="Image">
+                <div class="text-center">
+                    <img width="400" class="img-fluid mt-4" src="/cms/images/<?=$post['image']?>" alt="Image">                
+                </div>
             </div>
         </div>
     </div>
