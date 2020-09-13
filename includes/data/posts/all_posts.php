@@ -1,11 +1,11 @@
 <div class="content px-2 w-100">
-    <?php 
-        if (isset($_GET['deletepost'])) {
-            deletePost($_GET['deletepost']);
-        }
-        if(isset($_POST['update_post'])) {
-            updatePost($_POST['id']);
-        }
+    <?php
+    if (isset($_GET['deletepost'])) {
+        deletePost($_GET['deletepost']);
+    }
+    if (isset($_POST['update_post'])) {
+        updatePost($_POST['id']);
+    }
     ?>
     <table class="table table-bordered">
         <thead class="thead">
@@ -21,23 +21,28 @@
             <td>Actions</td>
         </thead>
         <tbody>
-    <?php
-        $posts = getAllPosts();
-        foreach ($posts as $row) {
-    ?>
-            <tr>
-                <td><?= $row['id'] ?></td>
-                <td><?= $row['category_id'] ?></td>
-                <td><?= $row['title'] ?></td>
-                <td><?= $row['author'] ?></td>
-                <td><?= $row['date'] ?></td>
-                <td><img width="100" src="/cms/images/<?= $row['image'] ?>" alt="Image"></td>
-                <td><?= $row['content'] ?></td>
-                <td><?= $row['comment_count'] ?></td>
-                <td><?= $row['tags'] ?></td>
-                <td><a class="btn btn-dark mr-2" href="/cms/includes/data/posts/posts.php?action=editpost&editpost=<?=$row['id']?>">Edit</a><a href="/cms/includes/data/posts/posts.php?deletepost=<?=$row['id']?>" class="btn btn-danger">Delete</a></td>
-            </tr>
-    <?php } ?>
+            <?php
+            if (isset($_GET['category'])) {
+                $posts = getAllPostsWithCategory($_GET['category']);
+            } else {
+                $posts = getAllPosts();
+            }
+            foreach ($posts as $row) {
+                $category = getCategoryById($row['category_id']);
+            ?>
+                <tr>
+                    <td><?= $row['id'] ?></td>
+                    <td><a class=="" href="posts.php?action=show&id=<?= $row['id'] ?>"><?= $category['name'] ?></a></td>
+                    <td><?= $row['title'] ?></td>
+                    <td><?= $row['author'] ?></td>
+                    <td><?= $row['date'] ?></td>
+                    <td><img width="100" src="/cms/images/<?= $row['image'] ?>" alt="Image"></td>
+                    <td><?= $row['content'] ?></td>
+                    <td><?= $row['comment_count'] ?></td>
+                    <td><?= $row['tags'] ?></td>
+                    <td><a class="btn btn-dark mr-2" href="/cms/includes/data/posts/posts.php?action=editpost&editpost=<?= $row['id'] ?>">Edit</a><a href="/cms/includes/data/posts/posts.php?deletepost=<?= $row['id'] ?>" class="btn btn-danger">Delete</a></td>
+                </tr>
+            <?php } ?>
         </tbody>
     </table>
 </div>

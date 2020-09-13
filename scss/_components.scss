@@ -1,22 +1,26 @@
-.wrapper{
+.wrapper {
     display: flex;
     align-items: stretch;
     width: 100%;
 }
-#sidebar{
+
+#sidebar {
     box-sizing: border-box;
     min-width: 250px;
     max-width: 250px;
-    height: 100vh;
+    // height: 100vh;
     transition: all .2s;
 }
-#sidebar.active{
+
+#sidebar.active {
     margin-left: -250px;
 }
+
 a[data-toggle="collapse"] {
     position: relative;
 }
-.dropdown-toggle::after{
+
+.dropdown-toggle::after {
     display: block;
     position: absolute;
     top: 50%;

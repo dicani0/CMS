@@ -1,22 +1,22 @@
 <?php
-    insertPost();
-    $categories = getAllCategories();
+insertPost();
+$categories = getAllCategories();
 ?>
 
 <div class="content w-100 px-2">
     <form method="post" enctype="multipart/form-data" action="">
         <div class="row w-100">
             <div class="col-6">
-                
+
                 <div class="form-group">
                     <label for="">Category</label>
                     <select class='form-control' name="category" id="">
-                        <?php 
-                            foreach ($categories as $category) {
-                        ?>
-                        <option  value="<?=$category['id']?>"><?=$category['name']?></option>
                         <?php
-                            }
+                        foreach ($categories as $category) {
+                        ?>
+                            <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+                        <?php
+                        }
                         ?>
                     </select>
                 </div>

@@ -13,4 +13,3 @@
     if(!$connection) {
         echo 'Failed to connect to database!';
     }
-?>
