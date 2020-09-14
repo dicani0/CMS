@@ -9,7 +9,8 @@ body {
 .wrapper {
   display: flex;
   align-items: stretch;
-  width: 100%; }
+  width: 100%;
+  min-height: calc(100vh - 60px); }
 
 #sidebar {
   box-sizing: border-box;
