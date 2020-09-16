@@ -32,7 +32,7 @@
             ?>
                 <tr>
                     <td><?= $row['id'] ?></td>
-                    <td><a class=="" href="posts.php?action=show&id=<?= $row['id'] ?>"><?= $category['name'] ?></a></td>
+                    <td><a class=="" href="index.php?action=show&id=<?= $row['id'] ?>"><?= $category['name'] ?></a></td>
                     <td><?= $row['title'] ?></td>
                     <td><?= $row['author'] ?></td>
                     <td><?= $row['date'] ?></td>
@@ -42,8 +42,8 @@
                     <td><?= $row['tags'] ?></td>
                     <td>
                         <div class="btn-group">
-                            <a class="btn btn-dark mr-2" href="/cms/includes/data/posts/posts.php?action=editpost&editpost=<?= $row['id'] ?>">Edit</a>
-                            <a href="/cms/includes/data/posts/posts.php?deletepost=<?= $row['id'] ?>" class="btn btn-danger">Delete</a>
+                            <a class="btn btn-dark mr-2" href="index.php?action=editpost&editpost=<?= $row['id'] ?>">Edit</a>
+                            <a href="index.php?deletepost=<?= $row['id'] ?>" class="btn btn-danger">Delete</a>
                         </div>
                     </td>
                 </tr>

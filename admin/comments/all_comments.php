@@ -23,9 +23,9 @@
             if (isset($_GET['category'])) {
                 $posts = getAllPostsWithCategory($_GET['category']);
             } else {
-                $posts = getAllComments();
+                $comments = getAllComments();
             }
-            foreach ($posts as $row) {
+            foreach ($comments as $row) {
                 // $category = getCategoryById($row['category_id']);
             ?>
                 <tr>

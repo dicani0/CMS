@@ -1,11 +1,11 @@
 <?php
-include '../../header.php';
+include '../../includes/header.php';
 insertCategory();
 deleteCategory();
 editCategory();
 ?>
 <div class="wrapper">
-    <?php include '../../sidebar.php'; ?>
+    <?php include '../../includes/sidebar.php'; ?>
     <div class="row w-100 p-2">
         <div class="col-6">
             <form action="" method="post">
@@ -51,7 +51,7 @@ editCategory();
 
                         <td><?php echo $row['id']; ?></td>
                         <td><?php echo $row['name'] ?></td>
-                        <td><a class="btn btn-danger btn-sm mr-2" href="<?php echo "categories.php?deletecategory={$row['id']}" ?>">Delete</a><a class="btn btn-secondary btn-sm" href="categories.php?editcategory=<?= $row['id'] ?>">Edit</a></td>
+                        <td><a class="btn btn-danger btn-sm mr-2" href="<?php echo "index.php?deletecategory={$row['id']}" ?>">Delete</a><a class="btn btn-secondary btn-sm" href="index.php?editcategory=<?= $row['id'] ?>">Edit</a></td>
 
                     <?php
                         echo '</tr>';
@@ -63,4 +63,4 @@ editCategory();
     </div>
 </div>
 
-<?php include '../../footer.php' ?>
+<?php include '../../includes/footer.php' ?>

@@ -4,7 +4,7 @@ $category = getCategoryById($post['category_id']);
 ?>
 
 <div class="card w-50 m-auto">
-    <img src="../../../images/<?= $post['image'] ?>" alt="" class="card-img-top">
+    <img src="../../images/<?= $post['image'] ?>" alt="" class="w-25 align-self-center">
     <h5 class="card-header">
         <?= $post['title'] ?>
     </h5>

@@ -3,7 +3,7 @@ $post = getPostById($_GET['editpost']);
 // updatePost($post['id']);
 $categories = getAllCategories();
 ?>
-<form method="post" class="w-100 p-2" enctype="multipart/form-data" action="posts.php">
+<form method="post" class="w-100 p-2" enctype="multipart/form-data" action="index.php">
     <div class="row w-100">
         <div class="col-6">
             <div class="form-group">
