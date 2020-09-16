@@ -10,36 +10,32 @@
     <table class="table table-bordered">
         <thead class="thead">
             <td>ID</td>
-            <td>Category</td>
-            <td>Title</td>
+            <td>Post</td>
             <td>Author</td>
-            <td>Date</td>
-            <td>Image</td>
+            <td>Email</td>
             <td>Content</td>
-            <td>Comments</td>
-            <td>Tags</td>
-            <td>Actions</td>
+            <td>Status</td>
+            <td>Date</td>
+            <td>Action</td>
         </thead>
         <tbody>
             <?php
             if (isset($_GET['category'])) {
                 $posts = getAllPostsWithCategory($_GET['category']);
             } else {
-                $posts = getAllPosts();
+                $posts = getAllComments();
             }
             foreach ($posts as $row) {
-                $category = getCategoryById($row['category_id']);
+                // $category = getCategoryById($row['category_id']);
             ?>
                 <tr>
                     <td><?= $row['id'] ?></td>
-                    <td><a class=="" href="posts.php?action=show&id=<?= $row['id'] ?>"><?= $category['name'] ?></a></td>
-                    <td><?= $row['title'] ?></td>
+                    <td><?= $row['post_id'] ?></td>
                     <td><?= $row['author'] ?></td>
-                    <td><?= $row['date'] ?></td>
-                    <td><img width="100" src="/cms/images/<?= $row['image'] ?>" alt="Image"></td>
+                    <td><?= $row['email'] ?></td>
                     <td><?= $row['content'] ?></td>
-                    <td><?= $row['comment_count'] ?></td>
-                    <td><?= $row['tags'] ?></td>
+                    <td><?= $row['status'] ?></td>
+                    <td><?= $row['date'] ?></td>
                     <td>
                         <div class="btn-group">
                             <a class="btn btn-dark mr-2" href="/cms/includes/data/posts/posts.php?action=editpost&editpost=<?= $row['id'] ?>">Edit</a>

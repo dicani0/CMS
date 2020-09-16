@@ -149,3 +149,13 @@ function updatePost($id)
         die(mysqli_error($connection));
     }
 }
+
+//comments
+
+function getAllComments()
+{
+    global $connection;
+    $query = 'SELECT * FROM comments';
+    $select_all_comments_query = mysqli_query($connection, $query);
+    return $select_all_comments_query;
+}
