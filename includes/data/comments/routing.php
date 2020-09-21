@@ -1,11 +1,11 @@
 <?php
 if (isset($_GET['action'])) {
     switch ($_GET['action']) {
-        case 'addpost':
-            include 'add_post.php';
+        case 'addcomment':
+            include 'add_comment.php';
             break;
-        case 'editpost':
-            include 'edit_post.php';
+        case 'editcomment':
+            include 'edit_comment.php';
             break;
         case 'show';
             include 'show_post.php';

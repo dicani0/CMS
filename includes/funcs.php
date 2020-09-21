@@ -152,10 +152,50 @@ function updatePost($id)
 
 //comments
 
+function insertComment()
+{
+    global $connection;
+    if (isset($_POST['add_comment'])) {
+        $comment_post = $_POST['post'];
+        $comment_author = $_POST['author'];
+        $comment_email = $_POST['email'];
+        $comment_content = $_POST['content'];
+        $comment_date = date("Y-m-d H:i:s");
+        $comment_status = "new";
+        $query = "INSERT INTO comments(post_id, author, email, content, status, date) ";
+        $query .= "VALUES('{$comment_post}', '{$comment_author}', '{$comment_email}', '{$comment_content}', '{$comment_date}', '{$comment_status}')";
+        $insert_comment_query = mysqli_query($connection, $query);
+        if ($insert_comment_query) {
+            // header('Location: posts.php');
+        }
+    }
+}
+
 function getAllComments()
 {
     global $connection;
     $query = 'SELECT * FROM comments';
     $select_all_comments_query = mysqli_query($connection, $query);
     return $select_all_comments_query;
+}
+
+function getCommentById($id)
+{
+    global $connection;
+    $query = "SELECT * FROM comments WHERE id = {$id}";
+    $select_post_by_id_query = mysqli_query($connection, $query);
+    return mysqli_fetch_assoc($select_post_by_id_query);
+}
+
+function updateComment($id)
+{
+    global $connection;
+    $comment_author = $_POST['author'];
+    $comment_content = $_POST['content'];
+    $query = "UPDATE comments ";
+    $query .= "SET author = '{$comment_author}', content = '{$comment_content}' ";
+    $query .= "WHERE id = {$id}";
+    if (!$update_comment_query = mysqli_query($connection, $query)) {
+        die(mysqli_error($connection));
+    }
 }

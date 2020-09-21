@@ -32,8 +32,8 @@
             ?>
                 <tr>
                     <td><?= $row['id'] ?></td>
-                    <td><a class=="" href="index.php?action=show&id=<?= $row['id'] ?>"><?= $category['name'] ?></a></td>
-                    <td><?= $row['title'] ?></td>
+                    <td><?= $category['name'] ?></td>
+                    <td><a class="btn btn-info" href="index.php?action=show&id=<?= $row['id'] ?>"><?= $row['title'] ?></a></td>
                     <td><?= $row['author'] ?></td>
                     <td><?= $row['date'] ?></td>
                     <td><img width="100" src="/cms/images/<?= $row['image'] ?>" alt="Image"></td>
