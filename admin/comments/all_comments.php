@@ -1,8 +1,8 @@
 <div class="content px-2 w-100">
     <?php
     insertComment();
-    if (isset($_GET['deletepost'])) {
-        deletePost($_GET['deletepost']);
+    if (isset($_GET['deletecomment'])) {
+        deleteComment($_GET['deletecomment']);
     }
     if (isset($_POST['update_comment'])) {
         updateComment($_POST['id']);
@@ -40,7 +40,7 @@
                     <td>
                         <div class="btn-group">
                             <a class="btn btn-dark mr-2" href="/cms/admin/comments/index.php?action=editcomment&editcomment=<?= $row['id'] ?>">Edit</a>
-                            <a href="/cms/includes/data/posts/posts.php?deletepost=<?= $row['id'] ?>" class="btn btn-danger">Delete</a>
+                            <a href="index.php?deletecomment=<?= $row['id'] ?>" class="btn btn-danger">Delete</a>
                         </div>
                     </td>
                 </tr>

@@ -163,10 +163,10 @@ function insertComment()
         $comment_date = date("Y-m-d H:i:s");
         $comment_status = "new";
         $query = "INSERT INTO comments(post_id, author, email, content, status, date) ";
-        $query .= "VALUES('{$comment_post}', '{$comment_author}', '{$comment_email}', '{$comment_content}', '{$comment_date}', '{$comment_status}')";
+        $query .= "VALUES('{$comment_post}', '{$comment_author}', '{$comment_email}', '{$comment_content}', '{$comment_status}', '{$comment_date}')";
         $insert_comment_query = mysqli_query($connection, $query);
         if ($insert_comment_query) {
-            // header('Location: posts.php');
+            header('Location: index.php');
         }
     }
 }
@@ -198,4 +198,12 @@ function updateComment($id)
     if (!$update_comment_query = mysqli_query($connection, $query)) {
         die(mysqli_error($connection));
     }
+}
+
+function deleteComment($id)
+{
+    global $connection;
+    $query = "DELETE from comments WHERE id = $id";
+    $delete_commenty_query = mysqli_query($connection, $query);
+    header('Location: index.php');
 }
