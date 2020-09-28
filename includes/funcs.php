@@ -109,7 +109,7 @@ function insertPost()
         move_uploaded_file($post_image_tmp, "C:/xampp/htdocs/CMS/images/$post_image");
         $insert_post_query = mysqli_query($connection, $query);
         if ($insert_post_query) {
-            header('Location: posts.php');
+            header('Location: index.php');
         }
     }
 }

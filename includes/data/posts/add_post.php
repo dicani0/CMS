@@ -4,7 +4,7 @@ $categories = getAllCategories();
 ?>
 
 <div class="content w-100 px-2">
-    <form method="post" enctype="multipart/form-data" action="posts.php">
+    <form method="post" enctype="multipart/form-data" action="index.php">
         <div class="row w-100">
             <div class="col-6">
 
@@ -21,7 +21,7 @@ $categories = getAllCategories();
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="">Title</label>
+                    <label for="">Titles</label>
                     <input type="text" class="form-control" name="title" id="">
                 </div>
                 <div class="form-group">

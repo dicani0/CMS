@@ -10,6 +10,7 @@ if (isset($_GET['action'])) {
             break;
         case 'show';
             include 'show_post.php';
+
             break;
         default:
             # code...

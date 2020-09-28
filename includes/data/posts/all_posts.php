@@ -1,5 +1,8 @@
 <div class="content px-2 w-100">
     <?php
+    if (isset($_POST['create_post'])) {
+        insertPost();
+    }
     if (isset($_GET['deletepost'])) {
         deletePost($_GET['deletepost']);
     }
