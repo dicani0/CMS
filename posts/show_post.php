@@ -1,6 +1,10 @@
 <?php
 $post = getPostById($_GET['id']);
 $category = getCategoryById($post['category_id']);
+$comments = getCommentByPost($_GET['id']);
+if (isset($_POST['add_comment'])) {
+    insertComment($_GET['id']);
+}
 ?>
 
 <div class="card w-100 mx-auto">
@@ -39,7 +43,7 @@ $category = getCategoryById($post['category_id']);
         <div class="card-footer">
             <h4>Comments</h4>
             <hr>
-            <form method="post" action="index.php">
+            <form action="" method="post">
                 <div class="row">
                     <div class="col-6">
                         <input type="hidden" name="post" value="<?= $_GET['id'] ?>" class="form-control">
@@ -59,6 +63,19 @@ $category = getCategoryById($post['category_id']);
                     </div>
                 </div>
             </form>
+            <?php
+            foreach ($comments as $comment) {
+            ?>
+                <hr>
+                <div class="media my-2">
+                    <div class="media-body">
+                        <h5 class="mt-0"><?= $comment['author'] ?><small class="float-right"><i><?= $comment['date'] ?></i></small></h5>
+                        <p><?= $comment['content'] ?></p>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
         </div>
     </div>
 </div>

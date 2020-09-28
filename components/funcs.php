@@ -152,11 +152,11 @@ function updatePost($id)
 
 //comments
 
-function insertComment()
+function insertComment($id)
 {
     global $connection;
     if (isset($_POST['add_comment'])) {
-        $comment_post = $_POST['post'];
+        $comment_post = $id;
         $comment_author = $_POST['author'];
         $comment_email = $_POST['email'];
         $comment_content = $_POST['content'];
@@ -185,6 +185,14 @@ function getCommentById($id)
     $query = "SELECT * FROM comments WHERE id = {$id}";
     $select_post_by_id_query = mysqli_query($connection, $query);
     return mysqli_fetch_assoc($select_post_by_id_query);
+}
+
+function getCommentByPost($id)
+{
+    global $connection;
+    $query = "SELECT * FROM comments WHERE post_id = $id";
+    // var_dump(mysqli_query($connection, $query));
+    return mysqli_query($connection, $query);
 }
 
 function updateComment($id)

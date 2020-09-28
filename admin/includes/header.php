@@ -15,7 +15,7 @@
 <body>
     <?php
     ob_start();
-    include 'db.php';
-    include 'funcs.php';
+    include __DIR__ . '/../../components/db.php';
+    include __DIR__ . '/../../components/funcs.php';
     include 'navigation.php';
     ?>

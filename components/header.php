@@ -14,6 +14,6 @@
 
 <body>
     <?php
-    include __DIR__ . '/../includes/db.php';
-    include __DIR__ . '/../includes/funcs.php';
+    include __DIR__ . '/db.php';
+    include __DIR__ . '/funcs.php';
     ?>

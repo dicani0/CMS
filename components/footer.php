@@ -12,5 +12,5 @@
 </script>
 <!-- Bootstrap core JavaScript -->
 <?php
-include __DIR__ . "/../includes/scripts.php";
+include __DIR__ . "/../admin/includes/scripts.php";
 ?>
