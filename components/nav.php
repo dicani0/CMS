@@ -18,7 +18,7 @@
                     <a class="nav-link" href="#">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Admin</a>
+                    <a class="nav-link" href="/cms/admin">Admin</a>
                 </li>
             </ul>
         </div>

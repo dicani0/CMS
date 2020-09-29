@@ -2,7 +2,6 @@
 $post = getPostById($_GET['id']);
 $category = getCategoryById($post['category_id']);
 $comments = getCommentByPost($_GET['id']);
-
 ?>
 
 <div class="card w-100 mx-auto">

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2020 at 09:00 AM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.8
+-- Czas generowania: 29 Wrz 2020, 21:58
+-- Wersja serwera: 10.4.13-MariaDB
+-- Wersja PHP: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cms`
+-- Baza danych: `cms`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Struktura tabeli dla tabeli `categories`
 --
 
 CREATE TABLE `categories` (
@@ -33,18 +33,18 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `categories`
+-- Zrzut danych tabeli `categories`
 --
 
 INSERT INTO `categories` (`id`, `name`) VALUES
-(16, 'PHP8'),
+(16, 'PHP322'),
 (17, 'Javascript2'),
-(25, 'Test');
+(26, 'Test2');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comments`
+-- Struktura tabeli dla tabeli `comments`
 --
 
 CREATE TABLE `comments` (
@@ -58,17 +58,19 @@ CREATE TABLE `comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `comments`
+-- Zrzut danych tabeli `comments`
 --
 
 INSERT INTO `comments` (`id`, `post_id`, `author`, `email`, `content`, `status`, `date`) VALUES
-(1, 2, 'Ziemniak', 'asdadasda@sadasd.as', 'Siemano kolano', 'open', '2020-08-13 00:00:00'),
-(2, 1, 'Me', 'miklasdawid@gmail.com', 'testing comments', '2020-09-20 00:06:31', '0000-00-00 00:00:00');
+(26, 46, 'asdad', 'miklasdawid@gmail.com', 'asdassdasd', 'approved', '2020-09-29 16:29:24'),
+(27, 46, 'asdad', 'miklasdawid@gmail.com', 'asdassdasd', 'approved', '2020-09-29 16:30:39'),
+(28, 46, 'asdad', 'miklasdawid@gmail.com', 'asdassdasd', 'approved', '2020-09-29 16:30:49'),
+(29, 46, 'asdad', 'miklasdawid@gmail.com', 'asdassdasd', 'approved', '2020-09-29 16:31:02');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posts`
+-- Struktura tabeli dla tabeli `posts`
 --
 
 CREATE TABLE `posts` (
@@ -85,34 +87,63 @@ CREATE TABLE `posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `posts`
+-- Zrzut danych tabeli `posts`
 --
 
 INSERT INTO `posts` (`id`, `category_id`, `title`, `author`, `date`, `image`, `content`, `tags`, `comment_count`, `status`) VALUES
-(1, 16, 'Test title2', 'Ziemniak', '0000-00-00', 'download.jfif', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum, corrupti maiores eum animi temporibus veniam, consequatur deleniti tenetur ipsa perspiciatis ea, totam praesentium! Eos, vel ex. Tenetur optio dicta nobis!', 'test, test1, test2', 0, ''),
-(2, 17, 'test title2', 'test author', '0000-00-00', '', '', 'test, test1, test2', 0, ''),
-(3, 16, 'MySQL', 'Me', '0000-00-00', 'ELFQOKBWoAAKgvj.png', '', 'mysql', 5, '');
+(46, 26, 'Test ', 'test', '2020-09-29', '3.jpg', 'Lorem ipsum', 'test', 5, '');
+
+-- --------------------------------------------------------
 
 --
--- Indexes for dumped tables
+-- Struktura tabeli dla tabeli `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(9) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` int(11) NOT NULL,
+  `firstname` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `avatar` text NOT NULL,
+  `role` varchar(255) NOT NULL,
+  `randSalt` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `lastname`, `email`, `avatar`, `role`, `randSalt`) VALUES
+(1, 'Dicanio', 123, 'Dawid', 'Miklas', 'miklasdawid@gmail.com', '', 'admin', '');
+
+--
+-- Indeksy dla zrzutów tabel
 --
 
 --
--- Indexes for table `categories`
+-- Indeksy dla tabeli `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `comments`
+-- Indeksy dla tabeli `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `posts`
+-- Indeksy dla tabeli `posts`
 --
 ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `users`
+--
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -120,22 +151,28 @@ ALTER TABLE `posts`
 --
 
 --
--- AUTO_INCREMENT for table `categories`
+-- AUTO_INCREMENT dla tabeli `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT for table `comments`
+-- AUTO_INCREMENT dla tabeli `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT for table `posts`
+-- AUTO_INCREMENT dla tabeli `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
+-- AUTO_INCREMENT dla tabeli `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -24,5 +24,11 @@
         <li><a class="text-light" href="/cms/admin/comments/">View all comments</a></li>
       </ul>
     </li>
+    <li class="border-bottom">
+      <a href="#users" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-light text-uppercase font-weight-bold">Users</a>
+      <ul class="collapse list-unstyled pl-2" id="users">
+        <li><a class="text-light" href="/cms/admin/users/">View all users</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
