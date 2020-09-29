@@ -161,13 +161,13 @@ function insertComment($id)
         $comment_email = $_POST['email'];
         $comment_content = $_POST['content'];
         $comment_date = date("Y-m-d H:i:s");
-        $comment_status = "new";
+        $comment_status = "unapproved";
         $query = "INSERT INTO comments(post_id, author, email, content, status, date) ";
         $query .= "VALUES('{$comment_post}', '{$comment_author}', '{$comment_email}', '{$comment_content}', '{$comment_status}', '{$comment_date}')";
         $insert_comment_query = mysqli_query($connection, $query);
-        if ($insert_comment_query) {
-            header('Location: index.php');
-        }
+        // if ($insert_comment_query) {
+        //     header('Location: index.php');
+        // }
     }
 }
 
@@ -190,7 +190,7 @@ function getCommentById($id)
 function getCommentByPost($id)
 {
     global $connection;
-    $query = "SELECT * FROM comments WHERE post_id = $id";
+    $query = "SELECT * FROM comments WHERE post_id = $id AND status = 'approved'";
     // var_dump(mysqli_query($connection, $query));
     return mysqli_query($connection, $query);
 }
@@ -202,6 +202,28 @@ function updateComment($id)
     $comment_content = $_POST['content'];
     $query = "UPDATE comments ";
     $query .= "SET author = '{$comment_author}', content = '{$comment_content}' ";
+    $query .= "WHERE id = {$id}";
+    if (!$update_comment_query = mysqli_query($connection, $query)) {
+        die(mysqli_error($connection));
+    }
+}
+
+function approveComment($id)
+{
+    global $connection;
+    $query = "UPDATE comments ";
+    $query .= "SET status = 'approved' ";
+    $query .= "WHERE id = {$id}";
+    if (!$update_comment_query = mysqli_query($connection, $query)) {
+        die(mysqli_error($connection));
+    }
+}
+
+function unapproveComment($id)
+{
+    global $connection;
+    $query = "UPDATE comments ";
+    $query .= "SET status = 'unapproved' ";
     $query .= "WHERE id = {$id}";
     if (!$update_comment_query = mysqli_query($connection, $query)) {
         die(mysqli_error($connection));

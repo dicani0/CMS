@@ -1,11 +1,17 @@
 <div class="content px-2 w-100">
     <?php
-    insertComment();
+    // insertComment();
     if (isset($_GET['deletecomment'])) {
         deleteComment($_GET['deletecomment']);
     }
     if (isset($_POST['update_comment'])) {
         updateComment($_POST['id']);
+    }
+    if (isset($_GET['approve'])) {
+        approveComment($_GET['approve']);
+    }
+    if (isset($_GET['unapprove'])) {
+        unapproveComment($_GET['unapprove']);
     }
     ?>
     <table class="table table-bordered">
@@ -17,6 +23,7 @@
             <td>Content</td>
             <td>Status</td>
             <td>Date</td>
+            <td>Approving</td>
             <td>Action</td>
         </thead>
         <tbody>
@@ -30,13 +37,27 @@
                 // $category = getCategoryById($row['category_id']);
             ?>
                 <tr>
-                    <td><?= $row['id'] ?></td>
-                    <td><?= $row['post_id'] ?></td>
-                    <td><?= $row['author'] ?></td>
-                    <td><?= $row['email'] ?></td>
-                    <td><?= $row['content'] ?></td>
-                    <td><?= $row['status'] ?></td>
-                    <td><?= $row['date'] ?></td>
+                    <td class="align-middle"><?= $row['id'] ?></td>
+                    <td class="align-middle"><?= $row['post_id'] ?></td>
+                    <td class="align-middle"><?= $row['author'] ?></td>
+                    <td class="align-middle"><?= $row['email'] ?></td>
+                    <td class="align-middle"><?= $row['content'] ?></td>
+                    <td class="align-middle
+                    <?php
+                    if ($row['status'] == 'approved') {
+                        echo 'bg-success';
+                    } else {
+                        echo 'bg-danger';
+                    }
+                    ?>
+                    "><?= $row['status'] ?></td>
+                    <td class="align-middle"><?= $row['date'] ?></td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-success mr-2" href="index.php?approve=<?= $row['id'] ?>">Approve</a>
+                            <a href="index.php?unapprove=<?= $row['id'] ?>" class="btn btn-warning">Unapprove</a>
+                        </div>
+                    </td>
                     <td>
                         <div class="btn-group">
                             <a class="btn btn-dark mr-2" href="/cms/admin/comments/index.php?action=editcomment&editcomment=<?= $row['id'] ?>">Edit</a>

@@ -1,6 +1,6 @@
-<?php include "../components/header.php";
+<?php
+include "../components/header.php";
 include "../components/nav.php";
-var_dump($_POST);
 if (isset($_POST['add_comment'])) {
     insertComment($_GET['id']);
 }

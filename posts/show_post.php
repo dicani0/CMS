@@ -2,9 +2,7 @@
 $post = getPostById($_GET['id']);
 $category = getCategoryById($post['category_id']);
 $comments = getCommentByPost($_GET['id']);
-if (isset($_POST['add_comment'])) {
-    insertComment($_GET['id']);
-}
+
 ?>
 
 <div class="card w-100 mx-auto">
@@ -43,10 +41,10 @@ if (isset($_POST['add_comment'])) {
         <div class="card-footer">
             <h4>Comments</h4>
             <hr>
-            <form action="" method="post">
+            <form action="index.php?action=show&id=<?= $post['id'] ?>" method="post">
                 <div class="row">
                     <div class="col-6">
-                        <input type="hidden" name="post" value="<?= $_GET['id'] ?>" class="form-control">
+                        <input type="hidden" name="post_id" value="<?= $_GET['id'] ?>" class="form-control">
                         <label for="Author">Author</label>
                         <input type="text" name="author" class="form-control">
                         <label for="Email">Email</label>
