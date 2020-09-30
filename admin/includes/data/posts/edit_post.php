@@ -46,7 +46,7 @@ $categories = getAllCategories();
         <div class="col-6">
             <div class="form-group">
                 <label for="">Content</label>
-                <textarea name="content" class="form-control" id="" cols="30" rows="6" value="<?= $post['content'] ?>"></textarea>
+                <textarea name="content" class="form-control" id="" cols="30" rows="6" value=""><?= $post['content'] ?></textarea>
             </div>
             <div class="form-group">
                 <label for="">Image</label>

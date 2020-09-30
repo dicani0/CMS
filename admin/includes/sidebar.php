@@ -28,6 +28,7 @@
       <a href="#users" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-light text-uppercase font-weight-bold">Users</a>
       <ul class="collapse list-unstyled pl-2" id="users">
         <li><a class="text-light" href="/cms/admin/users/">View all users</a></li>
+        <li><a class="text-light" href="/cms/admin/users/index.php?action=adduser">Add user</a></li>
       </ul>
     </li>
   </ul>

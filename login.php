@@ -1,5 +1,7 @@
 <?php include "components/header.php"; ?>
-<?php include "components/nav.php"; ?>
+<?php include "components/nav.php"; 
+
+?>
 
 <!-- Page Content -->
 <div class="container">
@@ -8,39 +10,25 @@
 
     <!-- Blog Entries Column -->
     <div class="col-md-8">
-
-      <h1 class="my-4">Dev Blog</h1>
-
-      <!-- Blog Post -->
-      <?php
-      $posts = getAllPosts();
-      foreach ($posts as $post) {
-      ?>
-        <div class="card mb-4">
-          <img class="card-img-top" src="images\<?= $post['image'] ?>" alt="Card image cap">
-          <div class="card-body">
-            <h2 class="card-title"><?= $post['title'] ?></h2>
-            <p class="card-text"><?= $post['content'] ?></p>
-            <a href="posts/index.php?action=show&id=<?= $post['id'] ?>" class="btn btn-primary">Read More &rarr;</a>
-          </div>
-          <div class="card-footer text-muted">
-            <?= $post['date'] ?> by
-            <a href="#"><?= $post['author'] ?></a>
-          </div>
+        <form class="mt-4 p-5 border border-info" method="post" action="">
+            <div class="form-group row">
+                <label for="username" class="col-sm-2 col-form-label">Username</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="username">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="password" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" name="password">
+                </div>
+            </div>
+            <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Sign in</button>
         </div>
-
-      <?php } ?>
-
-      <!-- Pagination -->
-      <ul class="pagination justify-content-center mb-4">
-        <li class="page-item">
-          <a class="page-link" href="#">&larr; Older</a>
-        </li>
-        <li class="page-item disabled">
-          <a class="page-link" href="#">Newer &rarr;</a>
-        </li>
-      </ul>
-
+  </div>
+        </form>
     </div>
 
     <!-- Sidebar Widgets Column -->

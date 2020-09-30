@@ -132,7 +132,7 @@ function updatePost($id)
     $post_date = date('d-m-y');
     $post_tags = $_POST['tags'];
     $post_content = $_POST['content'];
-    $post_comment_count = 5;
+    $post_comment_count = 0;
     $query = "UPDATE posts ";
 
     if (isset($_FILES['image']['error']) && $_FILES['image']['name'] != '') {
@@ -252,15 +252,19 @@ function getAllUsers()
 function addUser()
 {
     global $connection;
-    $comment_post = $id;
-    $comment_author = $_POST['author'];
-    $comment_email = $_POST['email'];
-    $comment_content = $_POST['content'];
-    $comment_date = date("Y-m-d H:i:s");
-    $comment_status = "unapproved";
-    $query = "INSERT INTO comments(post_id, author, email, content, status, date) ";
-    $query .= "VALUES('{$comment_post}', '{$comment_author}', '{$comment_email}', '{$comment_content}', '{$comment_status}', '{$comment_date}')";
-    $insert_comment_query = mysqli_query($connection, $query);
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $email = $_POST['email'];
+    $avatar_img = $_FILES['avatar']['name'];
+    $avatar_img_tmp = $_FILES['avatar']['tmp_name'];
+    $role = $_POST['role'];
+    $query = "INSERT INTO users(username, password, firstname, lastname, email, avatar, role) ";
+    $query .= "VALUES('{$username}', '{$password}', '{$firstname}', '{$lastname}', '{$email}', '{$avatar_img}', '{$role}')";
+    move_uploaded_file($avatar_img_tmp, __DIR__ . "/../images/users/$avatar_img");
+    mysqli_query($connection, $query);
+    header('Location: index.php');
 }
 
 function editUser($id)
@@ -271,11 +275,16 @@ function editUser($id)
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $email = $_POST['email'];
-    $avatar_img = $_FILES['avatar']['name'];
-    $avatar_img_tmp = $_FILES['avatar']['tmp_name'];
     $role = $_POST['role'];
     $query = "UPDATE users ";
-    $query .= "SET username = '{$username}', password = '{$password}', firstname = '{$firstname}', lastname = '{$lastname}', email = '{$email}', avatar = '{$avatar_img}', role = '{$role}' ";
+    if (isset($_FILES['avatar']['error']) && $_FILES['avatar']['name'] != '') {
+        $avatar_img = $_FILES['avatar']['name'];
+        $avatar_img_tmp = $_FILES['avatar']['tmp_name'];
+        $query .= "SET username = '{$username}', password = '{$password}', firstname = '{$firstname}', lastname = '{$lastname}', email = '{$email}', avatar = '{$avatar_img}', role = '{$role}' ";
+        move_uploaded_file($avatar_img_tmp, __DIR__ . "/../images/users/$avatar_img");
+    } else {
+        $query .= "SET username = '{$username}', password = '{$password}', firstname = '{$firstname}', lastname = '{$lastname}', email = '{$email}', role = '{$role}' ";
+    }
     $query .= "WHERE id = {$id}";
     if (!$update_comment_query = mysqli_query($connection, $query)) {
         die(mysqli_error($connection));
@@ -285,7 +294,13 @@ function editUser($id)
 function deleteUser($id)
 {
     global $connection;
-    $query = "DELETE from user WHERE id = $id";
+    $query = "DELETE from users WHERE id = $id";
     $delete_user_query = mysqli_query($connection, $query);
-    header('Location: index.php');
+}
+
+function getUserById($id)
+{
+    global $connection;
+    $query = "SELECT * FROM users WHERE id = $id";
+    return mysqli_fetch_assoc(mysqli_query($connection, $query));
 }
