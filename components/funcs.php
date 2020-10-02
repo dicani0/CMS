@@ -317,6 +317,7 @@ function logInUser($username, $password)
     } else {
         $user =  mysqli_fetch_assoc($request);
         if ($user != NULL) {
+            $_SESSION['id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
             return $user;
         }

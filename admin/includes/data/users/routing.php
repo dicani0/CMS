@@ -11,6 +11,9 @@ if (isset($_GET['action'])) {
         case 'show';
             include 'show_user.php';
             break;
+        case 'profile';
+            include 'profile.php';
+            break;
         default:
             include 'all_users.php';
             break;
