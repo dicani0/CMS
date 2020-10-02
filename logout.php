@@ -1,5 +1,6 @@
 <?php include "components/header.php"; ?>
 <?php include "components/nav.php";
+logOutUser();
 ?>
 
 <!-- Page Content -->
@@ -9,25 +10,7 @@
 
     <!-- Blog Entries Column -->
     <div class="col-md-8">
-      <form class="mt-4 p-5 border border-info" method="post" action="index.php">
-        <div class="form-group row">
-          <label for="username" class="col-sm-2 col-form-label">Username</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" name="username">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="password" class="col-sm-2 col-form-label">Password</label>
-          <div class="col-sm-10">
-            <input type="password" class="form-control" name="password">
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-10">
-            <button type="submit" name="login" class="btn btn-primary">Sign in</button>
-          </div>
-        </div>
-      </form>
+      <div class="alert alert-info">You are being logged out!</div>
     </div>
 
     <!-- Sidebar Widgets Column -->
@@ -81,5 +64,10 @@
 </div>
 <?php include "components/footer.php"; ?>
 </body>
+<script>
+  setTimeout(function() {
+    window.location.href = "index.php"
+  }, 5000);
+</script>
 
 </html>

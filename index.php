@@ -1,5 +1,19 @@
-<?php include "components/header.php"; ?>
-<?php include "components/nav.php"; ?>
+<?php
+include "components/header.php";
+include "components/nav.php";
+if (isset($_POST['login'])) {
+  $user = logInUser($_POST['username'], $_POST['password']);
+  if ($user == NULL) {
+?>
+    <div class="alert alert-danger">Wrong username or password</div>
+  <?php
+  } else {
+  ?>
+    <div class="alert alert-success">You have successfuly logged in, <?= $_SESSION['username'] ?>!</div>
+<?php
+  }
+}
+?>
 
 <!-- Page Content -->
 <div class="container">

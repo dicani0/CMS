@@ -304,3 +304,26 @@ function getUserById($id)
     $query = "SELECT * FROM users WHERE id = $id";
     return mysqli_fetch_assoc(mysqli_query($connection, $query));
 }
+
+function logInUser($username, $password)
+{
+    global $connection;
+    $username = mysqli_real_escape_string($connection, $username);
+    $password = mysqli_real_escape_string($connection, $password);
+    $query = "SELECT * FROM users WHERE username = '{$username}' AND password = '{$password}'";
+    $request = mysqli_query($connection, $query);
+    if (!$request) {
+        return NULL;
+    } else {
+        $user =  mysqli_fetch_assoc($request);
+        if ($user != NULL) {
+            $_SESSION['username'] = $user['username'];
+            return $user;
+        }
+    }
+}
+
+function logOutUser()
+{
+    session_unset();
+}

@@ -14,6 +14,7 @@
 
 <body>
     <?php
+    session_start();
     include __DIR__ . '/db.php';
     include __DIR__ . '/funcs.php';
     ?>

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="..">Blog</a>
+        <a class="navbar-brand" href="">Blog</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -15,11 +15,20 @@
                     <a class="nav-link" href="#">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
+                    <a class="nav-link" href="login.php">Sign In</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/cms/admin">Admin</a>
                 </li>
+                <?php
+                if (isset($_SESSION['username'])) {
+                ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php"><?= $_SESSION['username'] ?></a>
+                    </li>
+                <?php
+                }
+                ?>
             </ul>
         </div>
     </div>

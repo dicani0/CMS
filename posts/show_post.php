@@ -42,14 +42,14 @@ $comments = getCommentByPost($_GET['id']);
             <hr>
             <form action="index.php?action=show&id=<?= $post['id'] ?>" method="post">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-lg-6 col-12">
                         <input type="hidden" name="post_id" value="<?= $_GET['id'] ?>" class="form-control">
                         <label for="Author">Author</label>
                         <input type="text" name="author" class="form-control">
                         <label for="Email">Email</label>
                         <input type="text" name="email" class="form-control">
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-12">
                         <label for="Comment">Comment</label>
                         <textarea name="content" class="form-control" id="" cols="30" rows="4"></textarea>
                     </div>
@@ -66,8 +66,14 @@ $comments = getCommentByPost($_GET['id']);
                 <hr>
                 <div class="media my-2">
                     <div class="media-body">
-                        <h5 class="mt-0"><?= $comment['author'] ?><small class="float-right"><i><?= $comment['date'] ?></i></small></h5>
-                        <p><?= $comment['content'] ?></p>
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="mt-0"><?= $comment['author'] ?>
+                            </div>
+                            <div class="col-6"> <small class="float-right"><i><?= $comment['date'] ?></i></small></h5>
+                            </div>
+                        </div>
+                        <p class="font-italic"><?= $comment['content'] ?></p>
                     </div>
                 </div>
             <?php
