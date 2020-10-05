@@ -91,6 +91,14 @@ function getPostById($id)
     return mysqli_fetch_assoc($select_post_by_id_query);
 }
 
+function getPostsByFilter($filter)
+{
+    global $connection;
+    $query = "SELECT * FROM posts WHERE content LIKE '%{$filter}%' OR tags LIKE '%{$filter}%' OR author LIKE '%{$filter}%'";
+    $select_post_by_filter_query = mysqli_query($connection, $query);
+    return $select_post_by_filter_query;
+}
+
 function insertPost()
 {
     global $connection;
