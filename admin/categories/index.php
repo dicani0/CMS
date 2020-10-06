@@ -1,12 +1,12 @@
 <?php
-include '../../includes/header.php';
+include '../includes/header.php';
 insertCategory();
 deleteCategory();
 editCategory();
 ?>
 <div class="wrapper">
-    <?php include '../../includes/sidebar.php'; ?>
-    <div class="row w-100 p-2">
+    <?php include '../includes/sidebar.php'; ?>
+    <div class="row w-100 mx-auto p-2">
         <div class="col-6">
             <form action="" method="post">
                 <div class="form-group">
@@ -63,4 +63,4 @@ editCategory();
     </div>
 </div>
 
-<?php include '../../includes/footer.php' ?>
+<?php include '../includes/footer.php' ?>

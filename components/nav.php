@@ -14,20 +14,28 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/cms/login.php">Sign In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/cms/admin">Admin</a>
-                </li>
                 <?php
-                if (isset($_SESSION['username'])) {
+                if (!isset($_SESSION['username'])) :
                 ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cms/login.php">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cms/register.php">Sign Up</a>
+                    </li>
+                <?php else : ?>
                     <li class="nav-item">
                         <a class="nav-link" href="logout.php"><?= $_SESSION['username'] ?></a>
                     </li>
                 <?php
-                }
+                endif;
+                ?>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') : ?>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-warning" href="/cms/admin">Admin panel</a>
+                    </li>
+                <?php
+                endif;
                 ?>
             </ul>
         </div>

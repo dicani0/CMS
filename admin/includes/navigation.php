@@ -3,8 +3,6 @@
     <i class="fas fa-align-left"></i>
     <span>Toggle Sidebar</span>
   </button>
-  <a class="text-light" class="text-light" href="/cms/admin" class="navbar-brand">CMS</a>
-
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -20,6 +18,7 @@
                 </li>';
       }
       ?>
+      <a class="btn btn-outline-info ml-auto" href="/cms/" class="navbar-brand">Back to blog</a>
     </ul>
   </div>
 </nav>

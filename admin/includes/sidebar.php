@@ -1,5 +1,8 @@
 <nav id="sidebar" class="sidebar bg-dark p-2">
   <ul class="list-unstyled component text-light">
+    <li class="active mb-1 border-bottom py-2">
+      <a href="/cms/admin" class="text-light text-uppercase font-weight-bold d-block">Dashboard</a>
+    </li>
     <li href="#categories" class="active mb-1 border-bottom py-2">
       <a href="#categories" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-light text-uppercase font-weight-bold d-block"><i class="fas fa-align-justify mr-2"></i>Categories</a>
       <ul class="collapse list-unstyled pl-2" id="categories">
