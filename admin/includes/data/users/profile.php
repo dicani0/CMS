@@ -8,7 +8,7 @@ $profile = getUserById($_SESSION['id']);
 
         </div>
         <div class="col-8 p-2 border border-dark">
-            <h2><?= $profile['username'] ?></h2>
+            <h2 class="mr-auto"><?= $profile['username'] ?><span class="ml-2"><a class="btn btn-primary" href="index.php?action=edituser&edituser=<?= $profile['id'] ?>">Edit</a></span></h2>
             <div class="row mt-4">
                 <div class="col-6">
                     <p class="font-weight-bold">First name</p>

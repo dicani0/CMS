@@ -327,6 +327,7 @@ function logInUser($username, $password)
         if ($user != NULL) {
             $_SESSION['id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
+            header('refresh:3, url=index.php');
             return $user;
         }
     }

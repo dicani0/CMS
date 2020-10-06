@@ -9,7 +9,7 @@ if (isset($_POST['login'])) {
   <?php
   } else {
   ?>
-    <div class="alert alert-success">You have successfuly logged in, <?= $_SESSION['username'] ?>!</div>
+    <div class="alert alert-success">You are being logged in, <?= $_SESSION['username'] ?>, wait for page to refresh!</div>
 <?php
   }
 }
