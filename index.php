@@ -124,6 +124,3 @@ if (isset($_POST['login'])) {
   <!-- /.container -->
 </div>
 <?php include "components/footer.php"; ?>
-</body>
-
-</html>

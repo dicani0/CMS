@@ -5,6 +5,7 @@
     </div>
     <!-- /.container -->
 </footer>
+</body>
 <script>
     // setTimeout(function() {
     //     window.location.href = ""
@@ -14,3 +15,5 @@
 <?php
 include __DIR__ . "/../admin/includes/scripts.php";
 ?>
+
+</html>

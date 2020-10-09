@@ -3,7 +3,7 @@
 ?>
 
 <!-- Page Content -->
-<div class="container">
+<div class="container stretch">
 
   <div class="row">
 
@@ -28,6 +28,7 @@
           </div>
         </div>
       </form>
+
     </div>
 
     <!-- Sidebar Widgets Column -->
@@ -80,6 +81,3 @@
   <!-- /.container -->
 </div>
 <?php include "components/footer.php"; ?>
-</body>
-
-</html>
