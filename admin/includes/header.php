@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/cms/bootstrap/css/bootstrap.min.css">
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="/cms/css/main.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <title>Document</title>
 </head>
 

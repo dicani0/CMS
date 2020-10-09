@@ -187,6 +187,22 @@ function getAllComments()
     return $select_all_comments_query;
 }
 
+function getApprovedComments()
+{
+    global $connection;
+    $query = 'SELECT * FROM comments WHERE status = "approved"';
+    $select_all_comments_query = mysqli_query($connection, $query);
+    return $select_all_comments_query;
+}
+
+function getUnapprovedComments()
+{
+    global $connection;
+    $query = 'SELECT * FROM comments WHERE status ="unapproved"';
+    $select_all_comments_query = mysqli_query($connection, $query);
+    return $select_all_comments_query;
+}
+
 function getCommentById($id)
 {
     global $connection;

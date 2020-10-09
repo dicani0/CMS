@@ -1,7 +1,7 @@
 <div class="content px-2 w-100">
     <?php
     if (isset($_POST['add_user'])) {
-        addUser();
+        var_dump(addUser());
     }
     if (isset($_POST['edit_user'])) {
         editUser($_POST['id']);

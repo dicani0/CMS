@@ -2,6 +2,9 @@
 $post = getPostById($_GET['id']);
 $category = getCategoryById($post['category_id']);
 $comments = getCommentByPost($_GET['id']);
+if (isset($_POST['add_comment'])) {
+    insertComment($_GET['id']);
+}
 ?>
 
 <div class="card w-100 mx-auto">
@@ -16,7 +19,7 @@ $comments = getCommentByPost($_GET['id']);
         </div>
     </h5>
     <div class="card-body">
-        <img class="card-img-top mb-3" src="..\images\<?= $post['image'] ?>" alt="Card image cap">
+        <img class="card-img-top mb-3" src="images\<?= $post['image'] ?>" alt="Card image cap">
         <div class="card-text text-center">
             <?= $post['content'] ?>
         </div>

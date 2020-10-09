@@ -38,23 +38,27 @@ if (isset($_POST['login'])) {
       } elseif (isset($_GET['author'])) {
         $posts = getPostsByFilter($_GET['author']);
       }
-
-      foreach ($posts as $post) {
+      if (isset($_GET['action']) && $_GET['action'] == 'show') {
+        include 'posts/show_post.php';
+      } else {
+        foreach ($posts as $post) {
       ?>
-        <div class="card mb-4">
-          <img class="card-img-top" src="images\<?= $post['image'] ?>" alt="Card image cap">
-          <div class="card-body">
-            <h2 class="card-title"><?= $post['title'] ?></h2>
-            <p class="card-text"><?= $post['content'] ?></p>
-            <a href="index.php?action=show&id=<?= $post['id'] ?>" class="btn btn-primary">Read More &rarr;</a>
+          <div class="card mb-4">
+            <img class="card-img-top" src="images\<?= $post['image'] ?>" alt="Card image cap">
+            <div class="card-body">
+              <h2 class="card-title"><?= $post['title'] ?></h2>
+              <p class="card-text"><?= $post['content'] ?></p>
+              <a href="index.php?action=show&id=<?= $post['id'] ?>" class="btn btn-primary">Read More &rarr;</a>
+            </div>
+            <div class="card-footer text-muted">
+              <?= $post['date'] ?> by
+              <a href="index.php?author=<?= $post['author'] ?>"><?= $post['author'] ?></a>
+            </div>
           </div>
-          <div class="card-footer text-muted">
-            <?= $post['date'] ?> by
-            <a href="index.php?author=<?= $post['author'] ?>"><?= $post['author'] ?></a>
-          </div>
-        </div>
 
-      <?php } ?>
+      <?php }
+      } ?>
+
 
       <!-- Pagination -->
       <ul class="pagination justify-content-center mb-4">
