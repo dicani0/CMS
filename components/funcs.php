@@ -195,6 +195,7 @@ function getApprovedComments()
     return $select_all_comments_query;
 }
 
+
 function getUnapprovedComments()
 {
     global $connection;
@@ -288,7 +289,7 @@ function addUser()
     $query .= "VALUES('{$username}', '{$password}', '{$firstname}', '{$lastname}', '{$email}', '{$avatar_img}', '{$role}')";
     move_uploaded_file($avatar_img_tmp, __DIR__ . "/../images/users/$avatar_img");
     mysqli_query($connection, $query);
-    header('Location: index.php');
+    header('Location: index.php?msg=success');
 }
 
 function editUser($id)

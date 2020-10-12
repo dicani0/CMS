@@ -10,3 +10,10 @@ include __DIR__ . '\..\includes\header.php';
 <?php
 include __DIR__ . '\..\includes\footer.php';
 ?>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>

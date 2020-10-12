@@ -32,7 +32,9 @@
       <ul class="collapse list-unstyled pl-2" id="users">
         <li><a class="text-light d-block" href="/cms/admin/users/">View all users</a></li>
         <li><a class="text-light d-block" href="/cms/admin/users/index.php?action=adduser">Add user</a></li>
-        <li><a class="text-light d-block" href="/cms/admin/users/index.php?action=profile">Profile</a></li>
+        <?php if (isset($_SESSION['role'])) : ?>
+          <li><a class="text-light d-block" href="/cms/admin/users/index.php?action=profile">Profile</a></li>
+        <?php endif; ?>
       </ul>
     </li>
   </ul>

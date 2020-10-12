@@ -2,12 +2,21 @@
     <?php
     if (isset($_POST['create_post'])) {
         insertPost();
+    ?>
+        <div class="alert alert-info mt-2">Post added!</div>
+    <?php
     }
     if (isset($_GET['deletepost'])) {
         deletePost($_GET['deletepost']);
+    ?>
+        <div class="alert alert-danger mt-2">Post deleted!</div>
+    <?php
     }
     if (isset($_POST['update_post'])) {
         updatePost($_POST['id']);
+    ?>
+        <div class="alert alert-success mt-2">Post updated!</div>
+    <?php
     }
     ?>
     <table class="table table-bordered">

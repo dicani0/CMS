@@ -9,6 +9,13 @@
     if (isset($_GET['deleteuser'])) {
         deleteUser($_GET['deleteuser']);
     }
+    if (isset($_GET['msg']) && $_GET['msg'] == 'success') {
+    ?>
+        <div class="alert alert-success mt-2" role="alert">
+            User Added!
+        </div>
+    <?php
+    }
     ?>
     <table class="table table-bordered">
         <thead class="thead">

@@ -36,7 +36,7 @@ $categories = getAllCategories();
             <div class="col-6">
                 <div class="form-group">
                     <label for="">Content</label>
-                    <textarea name="content" class="form-control" id="" cols="30" rows="6"></textarea>
+                    <textarea name="content" style="height: 300px;" class="form-control" id="editor" cols="30" rows="10"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="">Image</label>

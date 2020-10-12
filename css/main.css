@@ -34,3 +34,6 @@ a[data-toggle="collapse"] {
   top: 50%;
   left: 215px;
   transform: translateY(-50%); }
+
+.ck-editor__editable {
+  min-height: 170px; }
