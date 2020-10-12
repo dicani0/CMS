@@ -307,6 +307,7 @@ function addUser()
     header('Location: index.php?msg=success');
 }
 
+
 function editUser($id)
 {
     global $connection;
@@ -343,6 +344,19 @@ function getUserById($id)
     global $connection;
     $query = "SELECT * FROM users WHERE id = $id";
     return mysqli_fetch_assoc(mysqli_query($connection, $query));
+}
+
+function registerUser($login, $email, $password)
+{
+    global $connection;
+    $username = $login;
+    $password = $password;
+    $email = $email;
+    $role = 'User';
+    $query = "INSERT INTO users(username, password, email, role) ";
+    $query .= "VALUES('{$username}', '{$password}', '{$email}', '{$role}')";
+    mysqli_query($connection, $query);
+    // header('Location: index.php?msg=success');
 }
 
 function logInUser($username, $password)

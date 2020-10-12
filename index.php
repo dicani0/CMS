@@ -14,6 +14,16 @@ if (isset($_POST['login'])) {
   }
 }
 ?>
+<?php
+if (isset($_POST['register'])) {
+  $registered = registerUser($_POST['username'], $_POST['email'], $_POST['password']);
+  if ($registered) {
+?>
+    <div class="alert alert-danger">Wrong username or password</div>
+<?php
+  }
+}
+?>
 
 <!-- Page Content -->
 <div class="container">

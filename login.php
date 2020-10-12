@@ -8,7 +8,8 @@
   <div class="row">
 
     <!-- Blog Entries Column -->
-    <div class="col-md-8">
+    <div class="col-md-8 mt-4">
+      <h3>Login</h3>
       <form class="mt-4 p-5 border border-info" method="post" action="index.php">
         <div class="form-group row">
           <label for="username" class="col-sm-2 col-form-label">Username</label>
@@ -29,6 +30,32 @@
         </div>
       </form>
 
+      <h3>Register</h3>
+      <form class="mt-4 p-5 border border-info" method="post" action="index.php">
+        <div class="form-group row">
+          <label for="username" class="col-sm-2 col-form-label">Username</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="username">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="email" class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="email">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="password" class="col-sm-2 col-form-label">Password</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" name="password">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-10">
+            <button type="submit" name="register" class="btn btn-primary">Sign up</button>
+          </div>
+        </div>
+      </form>
     </div>
 
     <!-- Sidebar Widgets Column -->
