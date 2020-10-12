@@ -79,7 +79,13 @@ function getAllPostsWithCategory($category)
 {
     global $connection;
     $query = "SELECT * FROM posts WHERE category_id = {$category}";
-    // var_dump(mysqli_query($connection, $query));
+    return mysqli_query($connection, $query);
+}
+
+function getAllPostsWithStatus($status)
+{
+    global $connection;
+    $query = "SELECT * FROM posts WHERE status = '{$status}'";
     return mysqli_query($connection, $query);
 }
 
@@ -106,14 +112,14 @@ function insertPost()
         $post_category = $_POST['category'];
         $post_title = $_POST['title'];
         $post_author = $_POST['author'];
-        $post_date = date('d-m-y');
         $post_tags = $_POST['tags'];
         $post_content = $_POST['content'];
+        $post_status = $_POST['status'];
         $post_image = $_FILES['image']['name'];
         $post_image_tmp = $_FILES['image']['tmp_name'];
         $post_comment_count = 5;
-        $query = "INSERT INTO posts(category_id, title, author, date, image, content, tags, comment_count) ";
-        $query .= "VALUES('{$post_category}', '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_comment_count}')";
+        $query = "INSERT INTO posts(category_id, title, author, date, image, content, tags, comment_count, status) ";
+        $query .= "VALUES('{$post_category}', '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_comment_count}', '{$post_status}')";
         move_uploaded_file($post_image_tmp, "C:/xampp/htdocs/CMS/images/$post_image");
         $insert_post_query = mysqli_query($connection, $query);
         if ($insert_post_query) {
@@ -140,21 +146,30 @@ function updatePost($id)
     $post_date = date('d-m-y');
     $post_tags = $_POST['tags'];
     $post_content = $_POST['content'];
-    $post_comment_count = 0;
+    $post_status = $_POST['status'];
     $query = "UPDATE posts ";
 
     if (isset($_FILES['image']['error']) && $_FILES['image']['name'] != '') {
         $post_image = $_FILES['image']['name'];
         $post_image_tmp = $_FILES['image']['tmp_name'];
-        $query .= "SET category_id = '{$post_category}', title = '{$post_title}', author = '{$post_author}', date = {$post_date}, tags = '{$post_tags}', content = '{$post_content}', image = '{$post_image}' ";
+        $query .= "SET category_id = '{$post_category}', title = '{$post_title}', author = '{$post_author}', date = {$post_date}, tags = '{$post_tags}', content = '{$post_content}', image = '{$post_image}', status = '{$post_status}' ";
         move_uploaded_file($post_image_tmp, __DIR__ . "/../images/$post_image");
     } else {
-        $query .= "SET category_id = '{$post_category}', title = '{$post_title}', author = '{$post_author}', date = {$post_date}, tags = '{$post_tags}', content = '{$post_content}' ";
+        $query .= "SET category_id = '{$post_category}', title = '{$post_title}', author = '{$post_author}', date = {$post_date}, tags = '{$post_tags}', content = '{$post_content}', status = '{$post_status}' ";
     }
 
     $query .= "WHERE id = {$id}";
     if (!$update_post_query = mysqli_query($connection, $query)) {
         die(mysqli_error($connection));
+    }
+}
+
+function bulkUpdatePostStatus($posts, $status)
+{
+    global $connection;
+    foreach ($posts as $postId) {
+        $query = "UPDATE posts SET status = '{$status}' WHERE id = $postId";
+        mysqli_query($connection, $query);
     }
 }
 
@@ -335,13 +350,13 @@ function logInUser($username, $password)
     global $connection;
     $username = mysqli_real_escape_string($connection, $username);
     $password = mysqli_real_escape_string($connection, $password);
-    $query = "SELECT * FROM users WHERE username = '{$username}' AND password = '{$password}'";
+    $query = "SELECT * FROM users WHERE username = '{$username}'  AND password = '{$password}'";
     $request = mysqli_query($connection, $query);
     if (!$request) {
         return NULL;
     } else {
         $user =  mysqli_fetch_assoc($request);
-        if ($user != NULL) {
+        if ($user != NULL && $user['username'] == $username && $user['password'] == $password) {
             $_SESSION['id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['role'] = $user['role'];

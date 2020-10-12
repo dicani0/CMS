@@ -3,7 +3,7 @@ insertPost();
 $categories = getAllCategories();
 ?>
 
-<div class="content w-100 px-2">
+<div class="content w-100 p-2">
     <form method="post" enctype="multipart/form-data" action="index.php">
         <div class="row w-100">
             <div class="col-6">
@@ -31,6 +31,14 @@ $categories = getAllCategories();
                 <div class="form-group">
                     <label for="">Tags</label>
                     <input type="text" class="form-control" name="tags" id="">
+                </div>
+                <div class="form-group">
+                    <label for="">Status</label>
+                    <select class="form-control" name="status" id="">
+                        <option value="published">Published</option>
+                        <option value="draft">Draft</option>
+                        <option value="removed">Removed</option>
+                    </select>
                 </div>
             </div>
             <div class="col-6">

@@ -4,7 +4,7 @@ $profile = getUserById($_SESSION['id']);
 <div class="content w-100 p-2 bg-secondary">
     <div class="row w-100">
         <div class="col-4">
-            <img src="../../images/users/pope.jfif" class="w-100" alt="test">
+            <img src="../../images/users/<?= $profile['avatar'] ?>" class="w-100" alt="test">
 
         </div>
         <div class="col-8 p-2 border border-dark">

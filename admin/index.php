@@ -12,7 +12,7 @@ include __DIR__ . '\includes\header.php';
     $users = getAllUsers();
     ?>
     <div class="d-flex flex-column w-100">
-        <div class="row mx-1 w-100">
+        <div class="row mx-auto w-100">
             <div class="card-deck w-100 m-4" style="max-height: 300px;">
                 <div class="card bg-dark text-white">
                     <div class="card-header">

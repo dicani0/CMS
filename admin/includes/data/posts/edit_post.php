@@ -39,6 +39,38 @@ $categories = getAllCategories();
                 <label for="">Tags</label>
                 <input type="text" class="form-control" name="tags" id="" value="<?= $post['tags'] ?>">
             </div>
+            <div class="form-group">
+                <label for="">Status</label>
+                <select class="form-control" name="status" id="">
+                    <?php if ($user['status'] == 'published') {
+                    ?>
+                        <option selected value="published">Published</option>
+                    <?php
+                    } else { ?>
+                        <option value="published">Published</option>
+                    <?php
+                    }
+                    ?>
+                    <?php if ($user['status'] == 'draft') {
+                    ?>
+                        <option selected value="draft">Draft</option>
+                    <?php
+                    } else { ?>
+                        <option value="draft">Draft</option>
+                    <?php
+                    }
+                    ?>
+                    <?php if ($user['status'] == 'removed') {
+                    ?>
+                        <option selected value="removed">Removed</option>
+                    <?php
+                    } else { ?>
+                        <option value="removed">Removed</option>
+                    <?php
+                    }
+                    ?>
+                </select>
+            </div>
             <div class="form-group text-center">
                 <input type="submit" class="form-control btn btn-dark w-50" name="update_post" value="Update">
             </div>
