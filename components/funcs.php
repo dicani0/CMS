@@ -346,12 +346,21 @@ function getUserById($id)
     return mysqli_fetch_assoc(mysqli_query($connection, $query));
 }
 
+function getUserByUsername($username)
+{
+    global $connection;
+    $query = "SELECT * FROM users WHERE username = '{$username}'";
+    return mysqli_fetch_assoc(mysqli_query($connection, $query));
+}
+
+
 function registerUser($login, $email, $password)
 {
     global $connection;
-    $username = $login;
-    $password = $password;
-    $email = $email;
+    $username = mysqli_real_escape_string($connection, $login);
+    $password = mysqli_real_escape_string($connection, $password);
+    $password = password_hash($password, PASSWORD_BCRYPT);
+    $email = mysqli_real_escape_string($connection, $email);
     $role = 'User';
     $query = "INSERT INTO users(username, password, email, role) ";
     $query .= "VALUES('{$username}', '{$password}', '{$email}', '{$role}')";
@@ -364,13 +373,11 @@ function logInUser($username, $password)
     global $connection;
     $username = mysqli_real_escape_string($connection, $username);
     $password = mysqli_real_escape_string($connection, $password);
-    $query = "SELECT * FROM users WHERE username = '{$username}'  AND password = '{$password}'";
-    $request = mysqli_query($connection, $query);
-    if (!$request) {
+    $user = getUserByUsername($username);
+    if ($user == NULL) {
         return NULL;
     } else {
-        $user =  mysqli_fetch_assoc($request);
-        if ($user != NULL && $user['username'] == $username && $user['password'] == $password) {
+        if ($user != NULL && $user['username'] == $username && password_verify($password, $user['password'])) {
             $_SESSION['id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['role'] = $user['role'];
