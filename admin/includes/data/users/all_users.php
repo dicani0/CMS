@@ -21,7 +21,6 @@
         <thead class="thead">
             <td>ID</td>
             <td>Username</td>
-            <td>Password</td>
             <td>Firstname</td>
             <td>Lastname</td>
             <td>Email</td>
@@ -37,7 +36,6 @@
                 <tr>
                     <td><?= $row['id'] ?></td>
                     <td><?= $row['username'] ?></td>
-                    <td><?= $row['password'] ?></td>
                     <td><?= $row['firstname'] ?></td>
                     <td><?= $row['lastname'] ?></td>
                     <td><?= $row['email'] ?></td>
@@ -46,7 +44,7 @@
                     <td>
                         <div class="btn-group">
                             <a class="btn btn-dark mr-2" href="index.php?action=edituser&edituser=<?= $row['id'] ?>">Edit</a>
-                            <a href="index.php?deleteuser=<?= $row['id'] ?>" class="btn btn-danger">Delete</a>
+                            <a onclick="return confirm('Are you sure?')" href=" index.php?deleteuser=<?= $row['id'] ?>" class="btn btn-danger">Delete</a>
                         </div>
                     </td>
                 </tr>

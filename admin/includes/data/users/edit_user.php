@@ -15,7 +15,7 @@ $user = getUserById($_GET['edituser']);
                 </div>
                 <div class="form-group">
                     <label for="">Password</label>
-                    <input type="password" class="form-control" name="password" id="" value="<?= $user['password'] ?>">
+                    <input type="password" class="form-control" name="password" id="" value="">
                 </div>
                 <div class="form-group">
                     <label for="">First name</label>

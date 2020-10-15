@@ -321,10 +321,21 @@ function editUser($id)
     if (isset($_FILES['avatar']['error']) && $_FILES['avatar']['name'] != '') {
         $avatar_img = $_FILES['avatar']['name'];
         $avatar_img_tmp = $_FILES['avatar']['tmp_name'];
-        $query .= "SET username = '{$username}', password = '{$password}', firstname = '{$firstname}', lastname = '{$lastname}', email = '{$email}', avatar = '{$avatar_img}', role = '{$role}' ";
+        if ($password != "") {
+            $password = password_hash($password, PASSWORD_BCRYPT);
+            $query .= "SET username = '{$username}', password = '{$password}', firstname = '{$firstname}', lastname = '{$lastname}', email = '{$email}', avatar = '{$avatar_img}', role = '{$role}' ";
+        } else {
+            $query .= "SET username = '{$username}', firstname = '{$firstname}', lastname = '{$lastname}', email = '{$email}', avatar = '{$avatar_img}', role = '{$role}' ";
+        }
+
         move_uploaded_file($avatar_img_tmp, __DIR__ . "/../images/users/$avatar_img");
     } else {
-        $query .= "SET username = '{$username}', password = '{$password}', firstname = '{$firstname}', lastname = '{$lastname}', email = '{$email}', role = '{$role}' ";
+        if ($password != "") {
+            $password = password_hash($password, PASSWORD_BCRYPT);
+            $query .= "SET username = '{$username}', password = '{$password}', firstname = '{$firstname}', lastname = '{$lastname}', email = '{$email}', role = '{$role}' ";
+        } else {
+            $query .= "SET username = '{$username}', firstname = '{$firstname}', lastname = '{$lastname}', email = '{$email}', role = '{$role}' ";
+        }
     }
     $query .= "WHERE id = {$id}";
     if (!$update_comment_query = mysqli_query($connection, $query)) {
