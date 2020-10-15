@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- FONT AWESOME -->
-    <link rel="stylesheet" href="/cms/css/facss/all.css">
+    <link rel="stylesheet" href="/cms/vendor/components/font-awesome/css/all.css">
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="/cms/vendor/twbs/bootstrap/dist/css/bootstrap.min.css">
     <!-- CUSTOM CSS -->
