@@ -1,6 +1,11 @@
 <?php
 include "components/header.php";
 include "components/nav.php";
+if (isset($_GET['page'])) {
+  $page = $_GET['page'];
+} else {
+  $page = 1;
+}
 if (isset($_POST['login'])) {
   $user = logInUser($_POST['username'], $_POST['password']);
   if ($user == NULL) {
@@ -26,7 +31,7 @@ if (isset($_POST['register'])) {
 ?>
 
 <!-- Page Content -->
-<div class="container">
+<div class="container stretch">
 
   <div class="row">
 
@@ -40,7 +45,8 @@ if (isset($_POST['register'])) {
       if (isset($_POST['search_posts'])) {
         $posts = getPostsByFilter($_POST['filter']);
       } else {
-        $posts = getAllPosts();
+        $posts = getAllPostsLimited(($page - 1) * 5, 5);
+        $nextPagePosts = mysqli_fetch_assoc(getAllPostsLimited($page * 5, 5));
       }
 
       if (isset($_GET['category'])) {
@@ -67,16 +73,18 @@ if (isset($_POST['register'])) {
           </div>
 
       <?php }
-      } ?>
+      }
+      $postsCount = mysqli_num_rows($posts);
+      ?>
 
 
       <!-- Pagination -->
       <ul class="pagination justify-content-center mb-4">
-        <li class="page-item">
-          <a class="page-link" href="#">&larr; Older</a>
+        <li class="page-item <?= ($page == 1) ? 'disabled' : '' ?>">
+          <a class="page-link" href="?page=<?= $page - 1 ?>">&larr; Previous Page</a>
         </li>
-        <li class="page-item disabled">
-          <a class="page-link" href="#">Newer &rarr;</a>
+        <li class="page-item <?= ($nextPagePosts == NULL) ? 'disabled' : '' ?>">
+          <a class="page-link" href="?page=<?= $page + 1 ?>">Next Page &rarr;</a>
         </li>
       </ul>
 

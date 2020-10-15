@@ -75,6 +75,14 @@ function getAllPosts()
     return $select_all_posts_query;
 }
 
+function getAllPostsLimited($offset, $count)
+{
+    global $connection;
+    $query = "SELECT * FROM posts LIMIT $offset, $count";
+    $select_all_posts_query = mysqli_query($connection, $query);
+    return $select_all_posts_query;
+}
+
 function getAllPostsWithCategory($category)
 {
     global $connection;
