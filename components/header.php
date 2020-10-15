@@ -6,7 +6,7 @@
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="/cms/css/facss/all.css">
     <!-- BOOTSTRAP -->
-    <link rel="stylesheet" href="/cms/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/cms/vendor/twbs/bootstrap/dist/css/bootstrap.min.css">
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="/cms/css/main.css">
     <title>Document</title>
