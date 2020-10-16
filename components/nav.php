@@ -27,6 +27,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="logout.php"><?= $_SESSION['username'] ?></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="/cms/?action=add">Add Post</a>
+                    </li>
                 <?php
                 endif;
                 ?>

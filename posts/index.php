@@ -18,10 +18,11 @@ if (isset($_POST['add_comment'])) {
 
             <!-- Blog Post -->
             <?php
-            if (isset($_GET['action'])) {
-                include 'show_post.php';
+            if (isset($_GET["action"]) && $_GET["action"] == "show") {
+                include "show_post.php";
+            } elseif (isset($_GET["action"]) && $_GET["action"] == "add_post") {
+                include "add_post.php";
             } else {
-
                 $posts = getAllPosts();
                 foreach ($posts as $post) {
             ?>

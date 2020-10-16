@@ -6,6 +6,9 @@ if (isset($_GET['page'])) {
 } else {
   $page = 1;
 }
+if (isset($_POST['create_post'])) {
+  insertPost();
+}
 if (isset($_POST['login'])) {
   $user = logInUser($_POST['username'], $_POST['password']);
   if ($user == NULL) {
@@ -56,6 +59,8 @@ if (isset($_POST['register'])) {
       }
       if (isset($_GET['action']) && $_GET['action'] == 'show') {
         include 'posts/show_post.php';
+      } elseif (isset($_GET['action']) && $_GET['action'] == 'add') {
+        include 'posts/add_post.php';
       } else {
         foreach ($posts as $post) {
       ?>
@@ -63,7 +68,7 @@ if (isset($_POST['register'])) {
             <img class="card-img-top" src="images\<?= $post['image'] ?>" alt="Card image cap">
             <div class="card-body">
               <h2 class="card-title"><?= $post['title'] ?></h2>
-              <p class="card-text"><?= $post['content'] ?></p>
+              <p class="card-text"><?= (strlen($post['content']) > 300) ? substr($post['content'], 0, 300) . "..." : $post['content'] ?></p>
               <a href="index.php?action=show&id=<?= $post['id'] ?>" class="btn btn-primary">Read More &rarr;</a>
             </div>
             <div class="card-footer text-muted">
@@ -78,64 +83,11 @@ if (isset($_POST['register'])) {
       ?>
 
 
-      <!-- Pagination -->
-      <ul class="pagination justify-content-center mb-4">
-        <li class="page-item <?= ($page == 1) ? 'disabled' : '' ?>">
-          <a class="page-link" href="?page=<?= $page - 1 ?>">&larr; Previous Page</a>
-        </li>
-        <li class="page-item <?= ($nextPagePosts == NULL) ? 'disabled' : '' ?>">
-          <a class="page-link" href="?page=<?= $page + 1 ?>">Next Page &rarr;</a>
-        </li>
-      </ul>
+      <?php include "components/pagination.php"; ?>
 
     </div>
 
-    <!-- Sidebar Widgets Column -->
-    <div class="col-md-4">
-
-      <!-- Search Widget -->
-      <div class="card my-4">
-        <h5 class="card-header">Search</h5>
-        <div class="card-body">
-          <form action="/cms/index.php" method="post">
-            <div class="input-group">
-              <input type="text" class="form-control" name="filter" placeholder="Search for...">
-              <span class="input-group-append">
-                <input type="submit" class="btn btn-secondary" name="search_posts" value="Go!">
-              </span>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <!-- Categories Widget -->
-      <div class="card my-4">
-        <h5 class="card-header">Categories</h5>
-        <div class="card-body">
-          <div class="d-flex p-2 flex-wrap">
-            <?php
-            $categories = getAllCategories();
-            foreach ($categories as $category) {
-            ?>
-              <div class="w-50 my-1"><a href="/cms/index.php?category=<?= $category['id'] ?>"><?= $category['name'] ?></a></div>
-            <?php
-            }
-            ?>
-
-          </div>
-        </div>
-
-        <!-- Side Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Side Widget</h5>
-          <div class="card-body">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias repudiandae excepturi esse blanditiis nam voluptas voluptates necessitatibus, ad fuga ab eaque voluptate commodi asperiores. Quo natus facere quos illo reiciendis.
-          </div>
-        </div>
-
-      </div>
-
-    </div>
+    <?php include "components/widgets.php"; ?>
     <!-- /.row -->
 
   </div>

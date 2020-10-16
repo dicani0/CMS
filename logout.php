@@ -4,7 +4,7 @@ logOutUser();
 ?>
 
 <!-- Page Content -->
-<div class="container">
+<div class="container stretch">
 
   <div class="row">
 

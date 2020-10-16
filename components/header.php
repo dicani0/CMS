@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="/cms/vendor/components/font-awesome/css/all.css">
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="/cms/vendor/twbs/bootstrap/dist/css/bootstrap.min.css">
+    <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
+    <script src="./vendor/components/jquery/jquery.min.js"></script>
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="/cms/css/main.css">
     <title>Document</title>
