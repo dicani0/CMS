@@ -350,7 +350,40 @@ function editUser($id)
         die(mysqli_error($connection));
     }
 }
+function updateProfile($id)
+{
+    global $connection;
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $email = $_POST['email'];
+    $query = "UPDATE users ";
+    if (isset($_FILES['avatar']['error']) && $_FILES['avatar']['name'] != '') {
+        $avatar_img = $_FILES['avatar']['name'];
+        $avatar_img_tmp = $_FILES['avatar']['tmp_name'];
+        if ($password != "") {
+            $password = password_hash($password, PASSWORD_BCRYPT);
+            $query .= "SET username = '{$username}', password = '{$password}', firstname = '{$firstname}', lastname = '{$lastname}', email = '{$email}', avatar = '{$avatar_img}' ";
+        } else {
+            $query .= "SET username = '{$username}', firstname = '{$firstname}', lastname = '{$lastname}', email = '{$email}', avatar = '{$avatar_img}' ";
+        }
 
+        move_uploaded_file($avatar_img_tmp, __DIR__ . "/../images/users/$avatar_img");
+    } else {
+        if ($password != "") {
+            $password = password_hash($password, PASSWORD_BCRYPT);
+            $query .= "SET username = '{$username}', password = '{$password}', firstname = '{$firstname}', lastname = '{$lastname}', email = '{$email}' ";
+        } else {
+            $query .= "SET username = '{$username}', firstname = '{$firstname}', lastname = '{$lastname}', email = '{$email}' ";
+        }
+    }
+    $query .= "WHERE id = {$id}";
+    if (!$update_comment_query = mysqli_query($connection, $query)) {
+        die(mysqli_error($connection));
+    }
+    header("Location: profile.php");
+}
 function deleteUser($id)
 {
     global $connection;
