@@ -410,3 +410,26 @@ function logOutUser()
 {
     session_unset();
 }
+
+function registerUserOnline()
+{
+    global $connection;
+    $session = session_id();
+    $query = "SELECT * FROM users_online WHERE session = '$session'";
+    $count = mysqli_num_rows(mysqli_query($connection, $query));
+    $time = time();
+    $timeout = $time - 60;
+    if ($count == NULL) {
+        mysqli_query($connection, "INSERT INTO users_online(session, time) VALUES('$session', '$time')");
+    } else {
+        mysqli_query($connection, "UPDATE users_online SET time = '$time' WHERE session = '$session'");
+    }
+}
+
+function getUsersOnline()
+{
+    global $connection;
+    $time = time();
+    $timeout = $time - 60;
+    return (mysqli_num_rows(mysqli_query($connection, "SELECT * FROM users_online WHERE time > '$timeout'")));
+}

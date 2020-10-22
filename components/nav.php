@@ -1,3 +1,6 @@
+<?php
+$usersOnline = getUsersOnline();
+?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container">
         <a class="navbar-brand" href="/cms">Blog</a>
@@ -40,6 +43,9 @@
                 <?php
                 endif;
                 ?>
+                <li class="nav-item border border-danger px-2">
+                    <span class="navbar-text">Users online: <span class="usersonline"></span> </span>
+                </li>
             </ul>
         </div>
     </div>
