@@ -2,6 +2,8 @@
 include "components/header.php";
 include "components/nav.php";
 $user = getUserById($_SESSION['id']);
+$comments = getUserComments($_SESSION['id']);
+$posts = getUserPosts($_SESSION['id']);
 if (isset($_POST['edit_user'])) {
     updateProfile($_SESSION['id']);
 }
@@ -22,11 +24,20 @@ if (isset($_POST['edit_user'])) {
         <div class="row mt-3">
             <div class="col-6">
                 <h4 class="text-center font-weight-bold">Posts</h4>
-                <p>Total posts: </p>
+                <p>Total posts: <?= mysqli_num_rows($posts) ?></p>
             </div>
             <div class="col-6">
                 <h4 class="text-center font-weight-bold">Comments</h4>
-                <p>Total comments: </p>
+                <p>Total comments: <?= mysqli_num_rows($comments) ?></p>
+                <div class="list-group">
+                    <?php
+                    foreach ($comments as $comment) {
+                    ?>
+                        <a href="index.php?action=show&id=<?= $comment['post_id'] ?>" class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center"><?= getPostById($comment['post_id'])['title'] ?> <span class="badge badge-danger"><?= $comment['date'] ?></span></a>
+                    <?php
+                    }
+                    ?>
+                </div>
             </div>
         </div>
     <?php } else { ?>

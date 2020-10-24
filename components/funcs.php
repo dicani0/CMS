@@ -191,17 +191,22 @@ function insertComment($id)
     global $connection;
     if (isset($_POST['add_comment'])) {
         $comment_post = $id;
-        $comment_author = $_POST['author'];
-        $comment_email = $_POST['email'];
         $comment_content = $_POST['content'];
         $comment_date = date("Y-m-d H:i:s");
         $comment_status = "unapproved";
-        $query = "INSERT INTO comments(post_id, author, email, content, status, date) ";
-        $query .= "VALUES('{$comment_post}', '{$comment_author}', '{$comment_email}', '{$comment_content}', '{$comment_status}', '{$comment_date}')";
-        $insert_comment_query = mysqli_query($connection, $query);
-        // if ($insert_comment_query) {
-        //     header('Location: index.php');
-        // }
+        if (isset($_SESSION['id'])) {
+            $user = getUserById($_SESSION['id']);
+            $name = $user['firstname'] . " " . $user['lastname'];
+            $query = "INSERT INTO comments(post_id, author, user_id, email, content, status, date) ";
+            $query .= "VALUES('{$comment_post}', '{$name}', {$_SESSION['id']}, '{$user['email']}', '{$comment_content}', 'approved', '{$comment_date}')";
+        } else {
+            $comment_author = $_POST['author'];
+            $comment_email = $_POST['email'];
+            $query = "INSERT INTO comments(post_id, author, email, content, status, date) ";
+            $query .= "VALUES('{$comment_post}', '{$comment_author}', '{$comment_email}', '{$comment_content}', 'unapproved', '{$comment_date}')";
+        }
+        mysqli_query($connection, $query);
+        header("Refresh:0");
     }
 }
 
@@ -406,6 +411,19 @@ function getUserByUsername($username)
     global $connection;
     $query = "SELECT * FROM users WHERE username = '{$username}'";
     return mysqli_fetch_assoc(mysqli_query($connection, $query));
+}
+
+function getUserComments($id)
+{
+    global $connection;
+    $query = "SELECT * FROM comments WHERE user_id = '{$id}'";
+    return mysqli_query($connection, $query);
+}
+function getUserPosts($id)
+{
+    global $connection;
+    $query = "SELECT * FROM posts WHERE user_id = '{$id}'";
+    return mysqli_query($connection, $query);
 }
 
 

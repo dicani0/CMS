@@ -64,10 +64,10 @@ if (isset($_POST['register'])) {
         foreach ($posts as $post) {
       ?>
           <div class="card mb-4">
-            <img class="card-img-top" src="images\<?= $post['image'] ?>" alt="Card image cap">
+            <img class="card-img-top" src="<?= ($post['image'] == "") ? 'https://via.placeholder.com/450x70/000000/FFFFFF/?text=CMS By Dicanio' : 'images/' .  $post['image'] ?>" alt="Card image cap">
             <div class="card-body">
               <h2 class="card-title"><?= $post['title'] ?></h2>
-              <p class="card-text"><?= (strlen($post['content']) > 300) ? substr($post['content'], 0, 300) . "..." : $post['content'] ?></p>
+              <p class="card-text"><?= (strlen($post['content']) > 300) ? substr(strip_tags($post['content'], '<ul><li><figure><table><thead><tbody><tr><td>'), 0, 300) . "..." : $post['content'] ?></p>
               <a href="index.php?action=show&id=<?= $post['id'] ?>" class="btn btn-primary">Read More &rarr;</a>
             </div>
             <div class="card-footer text-muted">

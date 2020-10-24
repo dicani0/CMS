@@ -15,7 +15,7 @@ if (isset($_POST['add_comment'])) {
             <span class="float-right text-muted font-italic"><?= $post['date'] ?></span>
         </div>
         <div class="blockquote-footer">
-            <?= $post['author'] ?>
+            <?= ($post['user_id'] == 0) ? $post['author'] . " <small>[guest]</small>" : "" ?>
         </div>
     </h5>
     <div class="card-body">
@@ -44,18 +44,25 @@ if (isset($_POST['add_comment'])) {
             <h4>Comments</h4>
             <hr>
             <form action="index.php?action=show&id=<?= $post['id'] ?>" method="post">
+                <input type="hidden" name="post_id" value="<?= $_GET['id'] ?>" class="form-control">
                 <div class="row">
-                    <div class="col-lg-6 col-12">
-                        <input type="hidden" name="post_id" value="<?= $_GET['id'] ?>" class="form-control">
-                        <label for="Author">Author</label>
-                        <input type="text" name="author" class="form-control">
-                        <label for="Email">Email</label>
-                        <input type="text" name="email" class="form-control">
-                    </div>
-                    <div class="col-lg-6 col-12">
-                        <label for="Comment">Comment</label>
-                        <textarea name="content" class="form-control" id="" cols="30" rows="4"></textarea>
-                    </div>
+                    <?php if (!isset($_SESSION['id'])) : ?>
+                        <div class="col-lg-6 col-12">
+                            <label for="Author">Author</label>
+                            <input type="text" name="author" class="form-control">
+                            <label for="Email">Email</label>
+                            <input type="text" name="email" class="form-control">
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <label for="Comment">Comment</label>
+                            <textarea name="content" class="form-control" id="" cols="30" rows="4"></textarea>
+                        </div>
+                    <?php else : ?>
+                        <div class="col-12">
+                            <label for="Comment">Comment</label>
+                            <textarea name="content" class="form-control" id="" cols="30" rows="4"></textarea>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <div class="row">
                     <div class="col-12 text-center mt-4">
@@ -64,17 +71,21 @@ if (isset($_POST['add_comment'])) {
                 </div>
             </form>
             <?php
+
             foreach ($comments as $comment) {
             ?>
                 <hr>
                 <div class="media my-2">
                     <div class="media-body">
                         <div class="row">
+
                             <div class="col-6">
-                                <h5 class="mt-0"><?= ($comment['user_id'] == 0) ? $comment['author'] . "[guest]" : "" ?>
+                                <h5 class="mt-0"><?= ($comment['user_id'] == 0) ? $comment['author'] . " <small>[guest]</small>" : $comment['author'] ?>
                             </div>
                             <div class="col-6"> <small class="float-right"><i><?= $comment['date'] ?></i></small></h5>
                             </div>
+
+
                         </div>
                         <p class="font-italic"><?= $comment['content'] ?></p>
                     </div>
