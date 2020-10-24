@@ -128,6 +128,7 @@ function insertPost()
         $post_comment_count = 5;
         $query = "INSERT INTO posts(category_id, title, author, date, image, content, tags, comment_count, status) ";
         $query .= "VALUES('{$post_category}', '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_comment_count}', '{$post_status}')";
+        var_dump($query);
         move_uploaded_file($post_image_tmp, "C:/xampp/htdocs/CMS/images/$post_image");
         $insert_post_query = mysqli_query($connection, $query);
         if ($insert_post_query) {
@@ -175,9 +176,11 @@ function updatePost($id)
 function bulkUpdatePostStatus($posts, $status)
 {
     global $connection;
-    foreach ($posts as $postId) {
-        $query = "UPDATE posts SET status = '{$status}' WHERE id = $postId";
-        mysqli_query($connection, $query);
+    if ($posts != NULL) {
+        foreach ($posts as $postId) {
+            $query = "UPDATE posts SET status = '{$status}' WHERE id = $postId";
+            mysqli_query($connection, $query);
+        }
     }
 }
 

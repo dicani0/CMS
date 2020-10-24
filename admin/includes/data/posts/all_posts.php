@@ -34,7 +34,7 @@
         </div>
 
         <?php
-        if (isset($_POST['bulk_update'])) {
+        if (isset($_POST['bulk_update']) && isset($_POST['selected_posts'])) {
             bulkUpdatePostStatus($_POST['selected_posts'], $_POST['status']);
         }
         ?>

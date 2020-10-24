@@ -71,7 +71,7 @@ if (isset($_POST['add_comment'])) {
                     <div class="media-body">
                         <div class="row">
                             <div class="col-6">
-                                <h5 class="mt-0"><?= $comment['author'] ?>
+                                <h5 class="mt-0"><?= ($comment['user_id'] == 0) ? $comment['author'] . "[guest]" : "" ?>
                             </div>
                             <div class="col-6"> <small class="float-right"><i><?= $comment['date'] ?></i></small></h5>
                             </div>
