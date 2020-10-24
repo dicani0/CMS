@@ -108,7 +108,7 @@ function getPostById($id)
 function getPostsByFilter($filter)
 {
     global $connection;
-    $query = "SELECT * FROM posts WHERE content LIKE '%{$filter}%' OR tags LIKE '%{$filter}%' OR author LIKE '%{$filter}%'";
+    $query = "SELECT * FROM posts WHERE title LIKE '%{$filter}%' OR content LIKE '%{$filter}%' OR tags LIKE '%{$filter}%' OR author LIKE '%{$filter}%'";
     $select_post_by_filter_query = mysqli_query($connection, $query);
     return $select_post_by_filter_query;
 }
@@ -353,7 +353,40 @@ function editUser($id)
         die(mysqli_error($connection));
     }
 }
+function updateProfile($id)
+{
+    global $connection;
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $email = $_POST['email'];
+    $query = "UPDATE users ";
+    if (isset($_FILES['avatar']['error']) && $_FILES['avatar']['name'] != '') {
+        $avatar_img = $_FILES['avatar']['name'];
+        $avatar_img_tmp = $_FILES['avatar']['tmp_name'];
+        if ($password != "") {
+            $password = password_hash($password, PASSWORD_BCRYPT);
+            $query .= "SET username = '{$username}', password = '{$password}', firstname = '{$firstname}', lastname = '{$lastname}', email = '{$email}', avatar = '{$avatar_img}' ";
+        } else {
+            $query .= "SET username = '{$username}', firstname = '{$firstname}', lastname = '{$lastname}', email = '{$email}', avatar = '{$avatar_img}' ";
+        }
 
+        move_uploaded_file($avatar_img_tmp, __DIR__ . "/../images/users/$avatar_img");
+    } else {
+        if ($password != "") {
+            $password = password_hash($password, PASSWORD_BCRYPT);
+            $query .= "SET username = '{$username}', password = '{$password}', firstname = '{$firstname}', lastname = '{$lastname}', email = '{$email}' ";
+        } else {
+            $query .= "SET username = '{$username}', firstname = '{$firstname}', lastname = '{$lastname}', email = '{$email}' ";
+        }
+    }
+    $query .= "WHERE id = {$id}";
+    if (!$update_comment_query = mysqli_query($connection, $query)) {
+        die(mysqli_error($connection));
+    }
+    header("Location: profile.php");
+}
 function deleteUser($id)
 {
     global $connection;
@@ -412,4 +445,27 @@ function logInUser($username, $password)
 function logOutUser()
 {
     session_unset();
+}
+
+function registerUserOnline()
+{
+    global $connection;
+    $session = session_id();
+    $query = "SELECT * FROM users_online WHERE session = '$session'";
+    $count = mysqli_num_rows(mysqli_query($connection, $query));
+    $time = time();
+    $timeout = $time - 60;
+    if ($count == NULL) {
+        mysqli_query($connection, "INSERT INTO users_online(session, time) VALUES('$session', '$time')");
+    } else {
+        mysqli_query($connection, "UPDATE users_online SET time = '$time' WHERE session = '$session'");
+    }
+}
+
+function getUsersOnline()
+{
+    global $connection;
+    $time = time();
+    $timeout = $time - 60;
+    return (mysqli_num_rows(mysqli_query($connection, "SELECT * FROM users_online WHERE time > '$timeout'")));
 }
