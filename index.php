@@ -42,7 +42,6 @@ if (isset($_POST['register'])) {
     <div class="col-md-8">
 
       <h1 class="my-4">Dev Blog</h1>
-
       <!-- Blog Post -->
       <?php
       if (isset($_POST['search_posts'])) {

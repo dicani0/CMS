@@ -108,7 +108,7 @@ function getPostById($id)
 function getPostsByFilter($filter)
 {
     global $connection;
-    $query = "SELECT * FROM posts WHERE content LIKE '%{$filter}%' OR tags LIKE '%{$filter}%' OR author LIKE '%{$filter}%'";
+    $query = "SELECT * FROM posts WHERE title LIKE '%{$filter}%' OR content LIKE '%{$filter}%' OR tags LIKE '%{$filter}%' OR author LIKE '%{$filter}%'";
     $select_post_by_filter_query = mysqli_query($connection, $query);
     return $select_post_by_filter_query;
 }
